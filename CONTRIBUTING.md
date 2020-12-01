@@ -1,4 +1,3 @@
-
 # Contributing
 
 ## Public Participation Invited
