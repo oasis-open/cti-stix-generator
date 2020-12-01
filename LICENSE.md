@@ -1,5 +1,3 @@
-=== LICENSE.md ===
-
 Copyright (c) [2020], OASIS Open Repositories
 All rights reserved.
 
