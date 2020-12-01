@@ -24,7 +24,7 @@ as referenced in the [OASIS TC Open Repositories Overview](https://www.oasis-ope
 
 Because different licenses apply to the OASIS TC's specification work, and this TC Open Repository, there is no guarantee that the licensure of specific 
 repository material will be compatible with licensing requirements of an implementation of a TC's specification. Please refer to the 
-[LICENSE](https://github.com/oasis-open/cti-stix-generator/blob/master/LICENSE> file for the terms of this material, and to the OASIS IPR Policy for 
+[LICENSE](https://github.com/oasis-open/cti-stix-generator/blob/master/LICENSE.md> file for the terms of this material, and to the OASIS IPR Policy for 
 [the terms applicable](https://www.oasis-open.org/policies-guidelines/ipr/#Non-Assertion-Mode) to the TC's specifications, including any applicable 
 [declarations](https://www.oasis-open.org/committees/cti/ipr.php).
 
