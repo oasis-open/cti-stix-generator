@@ -28,9 +28,9 @@ Initially, the TC members have designated one or more persons to serve as Mainta
 
 <a id="currentMaintainers">Current Maintainers</a> of this TC Open Repository are: 
 
-- <a mailto='clenk@mitre.org'>Chris Lenk</a>; GitHub ID: clenk; [The MITRE Corporation](https://www.mitre.org/)
+- <a href="mailto:clenk@mitre.org">Chris Lenk</a>; GitHub ID: clenk; [The MITRE Corporation](https://www.mitre.org/)
 
-- <a mailto='chisholm@mitre.org'>Andy Chisholm</a>; GitHub ID; chisholm/; [The MITRE Corporation](https://www.mitre.org/)
+- <a href="mailto:chisholm@mitre.org">Andy Chisholm</a>; GitHub ID; chisholm/; [The MITRE Corporation](https://www.mitre.org/)
 
 ## About OASIS TC Open Repositories
 
