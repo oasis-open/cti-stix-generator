@@ -1,4 +1,4 @@
-|Build_Status| |Coverage| |Version|
+|Build_Status| |Coverage| |Version| |Binder|
 
 cti-stix-generator
 ==================
@@ -18,9 +18,13 @@ Jupyter Notebook
 ----------------
 
 The `Jupyter notebook <https://jupyter.org/>`__ provides an interactive
-environment to input generator syntax and view the generated content. To use
-the notebook, install the generator's dependencies including the ``jupyter``
-extras, and run Jupyter:
+environment to input generator syntax and view the generated content. Go here to
+`launch the environment <https://mybinder.org/v2/gh/oasis-open/cti-stix-generator/HEAD>`__.
+
+Open ``stix.ipynb`` in Jupyter to use the tool. Look at ``examples.ipynb`` for
+documentation and examples of the syntax.
+
+To use the notebook locally, install the generator's dependencies including the ``jupyter`` extras, and run Jupyter:
 
 .. code-block:: bash
 
@@ -28,9 +32,6 @@ extras, and run Jupyter:
     jupyter nbextension install stix2viz --py
     jupyter nbextension enable stix2viz --py
     jupyter notebook
-
-Open ``stix.ipynb`` in Jupyter to use the tool. Look at ``examples.ipynb`` for
-documentation and examples of the syntax.
 
 Commandline Tool
 ----------------
@@ -128,3 +129,5 @@ Please send general questions about TC Open Repository participation to OASIS St
    :target: https://codecov.io/gh/oasis-open/cti-stix-validator
 .. |Version| image:: https://img.shields.io/pypi/v/stix2-generator.svg?maxAge=3600
    :target: https://pypi.org/project/stix2-generator/
+.. |Binder| image:: https://mybinder.org/badge_logo.svg
+   :target: https://mybinder.org/v2/gh/oasis-open/cti-stix-generator/HEAD
