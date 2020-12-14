@@ -7,7 +7,7 @@ def get_long_description():
         return f.read()
 
 setup(
-    name='stix2generator',
+    name='stix2-generator',
     version='0.1.0',
     description='Generate random STIX 2 content.',
     long_description=get_long_description(),
