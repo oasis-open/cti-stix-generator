@@ -8,7 +8,7 @@ def get_long_description():
 
 setup(
     name='stix2generator',
-    version='0.1',
+    version='0.1.0',
     description='Generate random STIX 2 content.',
     long_description=get_long_description(),
     long_description_content_type='text/x-rst',

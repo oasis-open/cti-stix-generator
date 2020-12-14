@@ -12,6 +12,8 @@ and testing. It uses a simple, sentence-like syntax for expressing what STIX
 content to generate. This tool is provided in two forms: as a Jupyter notebook
 and as a commandline tool.
 
+For more information, see `the documentation <https://stix2-generator.readthedocs.io/>`__ on ReadTheDocs.
+
 Jupyter Notebook
 ----------------
 
