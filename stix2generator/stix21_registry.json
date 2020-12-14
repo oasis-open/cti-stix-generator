@@ -1,0 +1,3208 @@
+{
+    "artifact": {
+        "type": "object",
+        "required": [
+            "id",
+            "type",
+            "url",
+            "hashes"
+        ],
+        "properties": {
+            "type": "artifact",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "artifact"
+            },
+            "defanged": {
+                "type": "boolean"
+            },
+            "mime_type": {
+                "type": "string",
+                "semantics": "mime_type"
+            },
+            "url": {
+                "type": "string",
+                "semantics": "url"
+            },
+            "hashes": {
+                "type": "object",
+                "ref": "hashes"
+            },
+            "encryption_algorithm": {
+                "type": "string",
+                "ref": "encryption-algorithm-enum"
+            },
+            "decryption_key": {
+                "type": "string"
+            }
+        }
+    },
+    "attack-pattern": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "id",
+            "name",
+            "type"
+        ],
+        "properties": {
+            "type": "attack-pattern",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "attack-pattern"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
+            },
+            "aliases": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "word"
+                }
+            },
+            "kill_chain_phases": {
+                "type": "array",
+                "ref": "kill-chain-phases"
+            }
+        }
+    },
+    "autonomous-system": {
+        "type": "object",
+        "required": [
+            "id",
+            "number",
+            "type"
+        ],
+        "properties": {
+            "type": "autonomous-system",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "autonomous-system"
+            },
+            "number": {
+                "type": "integer"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "company"
+            },
+            "rir": {
+                "type": "string",
+                "semantics": "company"
+            }
+        }
+    },
+    "campaign": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "name",
+            "id",
+            "type"
+        ],
+        "value-coconstraints": [
+            "first_seen <= last_seen"
+        ],
+        "properties": {
+            "type": "campaign",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "campaign"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
+            },
+            "aliases": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "word"
+                }
+            },
+            "first_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "last_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "objective": {
+                "type": "string",
+                "semantics": "sentence"
+            }
+        }
+    },
+    "course-of-action": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "id",
+            "name",
+            "type"
+        ],
+        "properties": {
+            "type": "course-of-action",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "course-of-action"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
+            }
+        }
+    },
+    "directory": {
+        "type": "object",
+        "required": [
+            "id",
+            "path",
+            "type"
+        ],
+        "properties": {
+            "type": "directory",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "directory"
+            },
+            "path": {
+                "type": "string",
+                "semantics": "file_path"
+            },
+            "path_enc": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "ctime": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "mtime": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "atime": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "contains_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "semantics": "stix-id",
+                            "stix-type": "file"
+                        },
+                        {
+                            "type": "string",
+                            "semantics": "stix-id",
+                            "stix-type": "directory"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "domain-name": {
+        "type": "object",
+        "required": [
+            "id",
+            "type",
+            "value"
+        ],
+        "properties": {
+            "type": "domain-name",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "domain-name"
+            },
+            "value": {
+                "type": "string",
+                "semantics": "domain_name"
+            },
+            "resolves_to_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "semantics": "stix-id",
+                            "stix-type": "ipv4-addr"
+                        },
+                        {
+                            "type": "string",
+                            "semantics": "stix-id",
+                            "stix-type": "ipv6-addr"
+                        },
+                        {
+                            "type": "string",
+                            "semantics": "stix-id",
+                            "stix-type": "domain-name"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "email-addr": {
+        "type": "object",
+        "required": [
+            "id",
+            "type",
+            "value"
+        ],
+        "properties": {
+            "type": "email-addr",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "email-addr"
+            },
+            "value": {
+                "type": "string",
+                "semantics": "email"
+            },
+            "display_name": {
+                "type": "string",
+                "semantics": "name"
+            },
+            "belongs_to_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "user-account"
+            }
+        }
+    },
+    "email-message": {
+        "type": "object",
+        "required": [
+            "id",
+            "is_multipart",
+            "type"
+        ],
+        "properties": {
+            "type": "email-message",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "email-message"
+            },
+            "is_multipart": {
+                "type": "boolean"
+            },
+            "date": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "content_type": {
+                "type": "string",
+                "semantics": "mime_type"
+            },
+            "from_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "email-addr"
+            },
+            "sender_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "email-addr"
+            },
+            "to_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "semantics": "stix-id",
+                            "stix-type": "email-addr"
+                        }
+                    ]
+                }
+            },
+            "cc_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "semantics": "stix-id",
+                            "stix-type": "email-addr"
+                        }
+                    ]
+                }
+            },
+            "bcc_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "semantics": "stix-id",
+                            "stix-type": "email-addr"
+                        }
+                    ]
+                }
+            },
+            "message_id": {
+                "type": "string",
+                "semantics": "ascii_email"
+            },
+            "subject": {
+                "type": "string",
+                "semantics": "sentence"
+            },
+            "received_lines": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "raw_email_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "artifact"
+            }
+        }
+    },
+    "file": {
+        "type": "object",
+        "presence-coconstraints": {
+            "property-groups": {
+                "name-hash": [
+                    "name",
+                    "hashes"
+                ]
+            },
+            "at-least-one": [
+                "name-hash"
+            ]
+        },
+        "required": [
+            "id",
+            "type",
+            "name-hash"
+        ],
+        "properties": {
+            "type": "file",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "file"
+            },
+            "defanged": {
+                "type": "boolean"
+            },
+            "hashes": {
+                "type": "object",
+                "ref": "hashes"
+            },
+            "size": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1048576
+            },
+            "name": {
+                "type": "string",
+                "semantics": "file_name"
+            },
+            "mime_type": {
+                "type": "string",
+                "semantics": "mime_type"
+            },
+            "ctime": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "mtime": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "atime": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "parent_directory_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "directory"
+            },
+            "contains_refs": {
+                "type": "array",
+                "ref": "array-of-sco-identifiers"
+            },
+            "content_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "artifact"
+            }
+        }
+    },
+    "grouping": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "context",
+            "id",
+            "type",
+            "object_refs"
+        ],
+        "properties": {
+            "type": "grouping",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "grouping"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
+            },
+            "context": {
+                "type": "string",
+                "ref": "grouping-context-ov"
+            },
+            "object_refs": {
+                "type": "array",
+                "ref": "array-of-sdo-identifiers"
+            }
+        }
+    },
+    "identity": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "type",
+            "name",
+            "id"
+        ],
+        "properties": {
+            "type": "identity",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "company"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "catch_phrase"
+            },
+            "roles": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "word"
+                }
+            },
+            "identity_class": {
+                "type": "string",
+                "ref": "identity-class-ov"
+            },
+            "sectors": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "industry-sector-ov"
+                }
+            },
+            "contact_information": {
+                "type": "string",
+                "semantics": "address"
+            }
+        }
+    },
+    "indicator": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "id",
+            "pattern",
+            "pattern_type",
+            "type",
+            "valid_from"
+        ],
+        "value-coconstraints": [
+            "valid_from < valid_until"
+        ],
+        "properties": {
+            "type": "indicator",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "indicator"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
+            },
+            "indicator_types": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "indicator-type-ov"
+                }
+            },
+            "pattern": {
+                "type": "string",
+                "semantics": "stix-pattern"
+            },
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "valid_until": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "kill_chain_phases": {
+                "type": "array",
+                "ref": "kill-chain-phases"
+            }
+        }
+    },
+    "infrastructure": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "id",
+            "name",
+            "type"
+        ],
+        "value-coconstraints": [
+            "first_seen <= last_seen"
+        ],
+        "properties": {
+            "type": "infrastructure",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "infrastructure"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
+            },
+            "infrastructure_types": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "infrastructure-type-ov"
+                }
+            },
+            "aliases": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "word"
+                }
+            },
+            "kill_chain_phases": {
+                "type": "array",
+                "ref": "kill-chain-phases"
+            },
+            "first_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "last_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            }
+        }
+    },
+    "intrusion-set": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "id",
+            "name",
+            "type"
+        ],
+        "value-coconstraints": [
+            "first_seen <= last_seen"
+        ],
+        "properties": {
+            "type": "intrusion-set",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "intrusion-set"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
+            },
+            "aliases": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "word"
+                }
+            },
+            "first_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "last_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "goals": {
+                "type": "array",
+                "semantics": "sentences"
+            },
+            "resource_level": {
+                "type": "string",
+                "ref": "attack-resource-level-ov"
+            },
+            "primary_motivation": {
+                "type": "string",
+                "ref": "attack-motivation-ov"
+            },
+            "secondary_motivations": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "attack-motivation-ov"
+                }
+            }
+        }
+    },
+    "ipv4-addr": {
+        "type": "object",
+        "required": [
+            "id",
+            "type",
+            "value"
+        ],
+        "properties": {
+            "type": "ipv4-addr",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "ipv4-addr"
+            },
+            "value": {
+                "type": "string",
+                "semantics": "ipv4"
+            }
+        }
+    },
+    "ipv6-addr": {
+        "type": "object",
+        "required": [
+            "id",
+            "type",
+            "value"
+        ],
+        "properties": {
+            "type": "ipv6-addr",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "ipv6-addr"
+            },
+            "value": {
+                "type": "string",
+                "semantics": "ipv6"
+            }
+        }
+    },
+    "location": {
+        "type": "object",
+        "import": "common-properties",
+        "presence-coconstraints": {
+            "property-groups": {
+                "latlon-group": [
+                    "latitude",
+                    "longitude"
+                ]
+            },
+            "all": [
+                "latlon-group"
+            ],
+            "dependencies": {
+                "precision": [
+                    "latlon-group"
+                ]
+            }
+        },
+        "required": [
+            "type",
+            "id",
+            "latlon-group"
+        ],
+        "properties": {
+            "type": "location",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "location"
+            },
+            "name": {
+                "type": "string"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "catch_phrase"
+            },
+            "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+            },
+            "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+            },
+            "precision": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+            },
+            "region": {
+                "type": "string",
+                "ref": "region-ov"
+            },
+            "country": {
+                "type": "string",
+                "semantics": "country"
+            },
+            "administrative_area": {
+                "type": "string"
+            },
+            "city": {
+                "type": "string",
+                "semantics": "city"
+            },
+            "street_address": {
+                "type": "string",
+                "semantics": "street_address"
+            },
+            "postal_code": {
+                "type": "string",
+                "semantics": "postalcode"
+            }
+        }
+    },
+    "mac-addr": {
+        "type": "object",
+        "required": [
+            "id",
+            "type",
+            "value"
+        ],
+        "properties": {
+            "type": "mac-addr",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "mac-addr"
+            },
+            "value": {
+                "type": "string",
+                "semantics": "mac_address"
+            }
+        }
+    },
+    "malware": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "id",
+            "is_family",
+            "type",
+            "name"
+        ],
+        "value-coconstraints": [
+            "first_seen <= last_seen"
+        ],
+        "properties": {
+            "type": "malware",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "malware"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
+            },
+            "malware_types": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "malware-type-ov"
+                }
+            },
+            "is_family": {
+                "type": "boolean"
+            },
+            "aliases": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "word"
+                }
+            },
+            "kill_chain_phases": {
+                "type": "array",
+                "ref": "kill-chain-phases"
+            },
+            "first_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "last_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "operating_system_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "stix-id",
+                    "stix-type": "software"
+                }
+            },
+            "architecture_execution_envs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "processor-architecture-ov"
+                }
+            },
+            "implementation_languages": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "implementation-language-ov"
+                }
+            },
+            "capabilities": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "malware-capabilities-ov"
+                }
+            },
+            "sample_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "semantics": "stix-id",
+                            "stix-type": "file"
+                        },
+                        {
+                            "type": "string",
+                            "semantics": "stix-id",
+                            "stix-type": "artifact"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "malware-analysis": {
+        "type": "object",
+        "import": "common-properties",
+        "presence-coconstraints": {
+            "property-groups": {
+                "result-group": [
+                    "result",
+                    "analysis_sco_refs"
+                ]
+            },
+            "at-least-one": [
+                "result-group"
+            ]
+        },
+        "required": [
+            "id",
+            "product",
+            "type",
+            "result-group"
+        ],
+        "properties": {
+            "type": "malware-analysis",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "malware-analysis"
+            },
+            "product": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "version": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "configuration_version": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 20
+            },
+            "modules": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "analysis_engine_version": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 20
+            },
+            "analysis_definition_version": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 20
+            },
+            "submitted": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "analysis_started": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "analysis_ended": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "result": {
+                "type": "string",
+                "ref": "malware-result-ov"
+            },
+            "result_name": {
+                "type": "string",
+                "semantics": "sentence"
+            },
+            "host_vm_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "software"
+            },
+            "operating_system_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "software"
+            },
+            "installed_software_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "stix-id",
+                    "stix-type": "software"
+                }
+            },
+            "analysis_sco_refs": {
+                "type": "array",
+                "ref": "array-of-sco-identifiers"
+            },
+            "sample_ref": {
+                "type": "string",
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "semantics": "stix-id",
+                        "stix-type": "artifact"
+                    },
+                    {
+                        "type": "string",
+                        "semantics": "stix-id",
+                        "stix-type": "file"
+                    },
+                    {
+                        "type": "string",
+                        "semantics": "stix-id",
+                        "stix-type": "network-traffic"
+                    }
+                ]
+            }
+        }
+    },
+    "marking-definition": {
+        "type": "object",
+        "oneOf": [
+            {
+                "type": "object",
+                "properties": {
+                    "type": "marking-definition",
+                    "spec_version": "2.1",
+                    "id": "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9",
+                    "created": "2017-01-20T00:00:00.000Z",
+                    "definition_type": "tlp",
+                    "name": "TLP:WHITE",
+                    "definition": {
+                        "type": "object",
+                        "properties": {
+                            "tlp": "white"
+                        }
+                    }
+                }
+            },
+            {
+                "type": "object",
+                "properties": {
+                    "type": "marking-definition",
+                    "spec_version": "2.1",
+                    "id": "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
+                    "created": "2017-01-20T00:00:00.000Z",
+                    "definition_type": "tlp",
+                    "name": "TLP:GREEN",
+                    "definition": {
+                        "type": "object",
+                        "properties": {
+                            "tlp": "green"
+                        }
+                    }
+                }
+            },
+            {
+                "type": "object",
+                "properties": {
+                    "type": "marking-definition",
+                    "spec_version": "2.1",
+                    "id": "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82",
+                    "created": "2017-01-20T00:00:00.000Z",
+                    "definition_type": "tlp",
+                    "name": "TLP:AMBER",
+                    "definition": {
+                        "type": "object",
+                        "properties": {
+                            "tlp": "amber"
+                        }
+                    }
+                }
+            },
+            {
+                "type": "object",
+                "properties": {
+                    "type": "marking-definition",
+                    "spec_version": "2.1",
+                    "id": "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed",
+                    "created": "2017-01-20T00:00:00.000Z",
+                    "definition_type": "tlp",
+                    "name": "TLP:RED",
+                    "definition": {
+                        "type": "object",
+                        "properties": {
+                            "tlp": "red"
+                        }
+                    }
+                }
+            },
+            {
+                "type": "object",
+                "required": [
+                    "id",
+                    "type",
+                    "created",
+                    "spec_version",
+                    "definition",
+                    "definition_type"
+                ],
+                "properties": {
+                    "type": "marking-definition",
+                    "id": {
+                        "type": "string",
+                        "semantics": "stix-id",
+                        "stix-type": "marking-definition"
+                    },
+                    "created": {
+                        "type": "string",
+                        "semantics": "stix-timestamp"
+                    },
+                    "spec_version": "2.1",
+                    "created_by_ref": {
+                        "type": "string",
+                        "semantics": "stix-id",
+                        "stix-type": "identity"
+                    },
+                    "name": {
+                        "type": "string",
+                        "semantics": "word"
+                    },
+                    "definition_type": "statement",
+                    "definition": {
+                        "type": "object",
+                        "required": [
+                            "statement"
+                        ],
+                        "properties": {
+                            "statement": {
+                                "type": "string",
+                                "semantics": "paragraph"
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "mutex": {
+        "type": "object",
+        "required": [
+            "id",
+            "name",
+            "type"
+        ],
+        "properties": {
+            "type": "mutex",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "mutex"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            }
+        }
+    },
+    "network-traffic": {
+        "type": "object",
+        "value-coconstraints": [
+            "start < end"
+        ],
+        "presence-coconstraints": {
+            "property-groups": {
+                "src-dst-group": [
+                    "src_ref",
+                    "dst_ref"
+                ]
+            },
+            "at-least-one": [
+                "src-dst-group"
+            ],
+            "dependencies": {
+                "end": [
+                    "is_active"
+                ]
+            }
+        },
+        "required": [
+            "id",
+            "protocols",
+            "type",
+            "src-dst-group"
+        ],
+        "properties": {
+            "type": "network-traffic",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "network-traffic"
+            },
+            "defanged": {
+                "type": "boolean"
+            },
+            "start": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "end": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "is_active": false,
+            "src_ref": {
+                "type": "string",
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "semantics": "stix-id",
+                        "stix-type": "ipv4-addr"
+                    },
+                    {
+                        "type": "string",
+                        "semantics": "stix-id",
+                        "stix-type": "ipv6-addr"
+                    },
+                    {
+                        "type": "string",
+                        "semantics": "stix-id",
+                        "stix-type": "mac-addr"
+                    },
+                    {
+                        "type": "string",
+                        "semantics": "stix-id",
+                        "stix-type": "domain-name"
+                    }
+                ]
+            },
+            "dst_ref": {
+                "type": "string",
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "semantics": "stix-id",
+                        "stix-type": "ipv4-addr"
+                    },
+                    {
+                        "type": "string",
+                        "semantics": "stix-id",
+                        "stix-type": "ipv6-addr"
+                    },
+                    {
+                        "type": "string",
+                        "semantics": "stix-id",
+                        "stix-type": "mac-addr"
+                    },
+                    {
+                        "type": "string",
+                        "semantics": "stix-id",
+                        "stix-type": "domain-name"
+                    }
+                ]
+            },
+            "src_port": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 65535
+            },
+            "dst_port": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 65535
+            },
+            "protocols": [
+                "ipv4",
+                "tcp",
+                "http"
+            ],
+            "src_byte_count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1048576
+            },
+            "dst_byte_count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1048576
+            },
+            "src_packets": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1048576
+            },
+            "dst_packets": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1048576
+            },
+            "src_payload_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "artifact"
+            },
+            "dst_payload_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "artifact"
+            },
+            "encapsulates_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "stix-id",
+                    "stix-type": "network-traffic"
+                }
+            },
+            "encapsulated_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "network-traffic"
+            }
+        }
+    },
+    "note": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "content",
+            "id",
+            "object_refs",
+            "type"
+        ],
+        "properties": {
+            "type": "note",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "note"
+            },
+            "abstract": {
+                "type": "string",
+                "semantics": "paragraph"
+            },
+            "content": {
+                "type": "string",
+                "semantics": "paragraph"
+            },
+            "authors": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "word"
+                }
+            },
+            "object_refs": {
+                "type": "array",
+                "ref": "array-of-sdo-identifiers"
+            }
+        }
+    },
+    "observed-data": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "first_observed",
+            "id",
+            "last_observed",
+            "number_observed",
+            "type",
+            "observables-group"
+        ],
+        "value-coconstraints": [
+            "first_observed <= last_observed"
+        ],
+        "presence-coconstraints": {
+            "property-groups": {
+                "observables-group": [
+                    "objects",
+                    "object_refs"
+                ]
+            },
+            "one": [
+                "observables-group"
+            ]
+        },
+        "properties": {
+            "type": "observed-data",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "observed-data"
+            },
+            "first_observed": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "last_observed": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "number_observed": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 999999999
+            },
+            "object_refs": {
+                "type": "array",
+                "ref": "array-of-sco-identifiers"
+            },
+            "objects": {
+                "type": "object",
+                "semantics": "observable-container",
+                "max_depth": 3
+            }
+        }
+    },
+    "opinion": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "id",
+            "object_refs",
+            "opinion",
+            "type"
+        ],
+        "properties": {
+            "type": "opinion",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "opinion"
+            },
+            "explanation": {
+                "type": "string",
+                "semantics": "paragraph"
+            },
+            "authors": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "word"
+                }
+            },
+            "object_refs": {
+                "type": "array",
+                "ref": "array-of-sdo-identifiers"
+            },
+            "opinion": {
+                "type": "string",
+                "ref": "opinion-enum"
+            }
+        }
+    },
+    "process": {
+        "type": "object",
+        "presence-coconstraints": {
+            "property-groups": {
+                "all-props-group": [
+                    "is_hidden",
+                    "pid",
+                    "created_time",
+                    "cwd",
+                    "opened_connection_refs",
+                    "creator_user_ref",
+                    "image_ref",
+                    "parent_ref",
+                    "child_refs"
+                ]
+            },
+            "at-least-one": [
+                "all-props-group"
+            ]
+        },
+        "required": [
+            "id",
+            "type",
+            "all-props-group"
+        ],
+        "properties": {
+            "type": "process",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "process"
+            },
+            "is_hidden": {
+                "type": "boolean"
+            },
+            "pid": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 65535
+            },
+            "created_time": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "cwd": {
+                "type": "string",
+                "semantics": "file_path"
+            },
+            "opened_connection_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "stix-id",
+                    "stix-type": "network-traffic"
+                }
+            },
+            "creator_user_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "user-account"
+            },
+            "image_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "file"
+            },
+            "parent_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "process"
+            },
+            "child_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "stix-id",
+                    "stix-type": "process"
+                }
+            }
+        }
+    },
+    "software": {
+        "type": "object",
+        "required": [
+            "id",
+            "name",
+            "type"
+        ],
+        "properties": {
+            "type": "software",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "software"
+            },
+            "name": {
+                "type": "string"
+            },
+            "cpe": "cpe:2.3:o:fedoraproject:fedora:29:*:*:*:*:*:*:*",
+            "swid": "org.fedoraproject.Fedora-29",
+            "vendor": {
+                "type": "string",
+                "semantics": "company"
+            },
+            "version": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 20
+            }
+        }
+    },
+    "report": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "id",
+            "name",
+            "object_refs",
+            "published",
+            "type"
+        ],
+        "properties": {
+            "type": "report",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "report"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "paragraph"
+            },
+            "report_types": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "report-type-ov"
+                }
+            },
+            "published": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "object_refs": {
+                "type": "array",
+                "ref": "array-of-sdo-identifiers"
+            }
+        }
+    },
+    "threat-actor": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "id",
+            "name",
+            "type"
+        ],
+        "value-coconstraints": [
+            "first_seen <= last_seen"
+        ],
+        "properties": {
+            "type": "threat-actor",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "threat-actor"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
+            },
+            "threat_actor_types": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "threat-actor-type-ov"
+                }
+            },
+            "aliases": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "word"
+                }
+            },
+            "first_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "last_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "roles": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "threat-actor-role-ov"
+                }
+            },
+            "goals": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "word"
+                }
+            },
+            "sophistication": {
+                "type": "string",
+                "ref": "threat-actor-sophistication-ov"
+            },
+            "resource_level": {
+                "type": "string",
+                "ref": "attack-resource-level-ov"
+            },
+            "primary_motivation": {
+                "type": "string",
+                "ref": "attack-motivation-ov"
+            },
+            "secondary_motivations": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "attack-motivation-ov"
+                }
+            },
+            "personal_motivations": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "attack-motivation-ov"
+                }
+            }
+        }
+    },
+    "tool": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "id",
+            "name",
+            "type"
+        ],
+        "properties": {
+            "type": "tool",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "tool"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
+            },
+            "tool_types": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "ref": "tool-type-ov"
+                }
+            },
+            "aliases": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "word"
+                }
+            },
+            "kill_chain_phases": {
+                "type": "array",
+                "ref": "kill-chain-phases"
+            },
+            "tool_version": {
+                "type": "string",
+                "semantics": "word"
+            }
+        }
+    },
+    "url": {
+        "type": "object",
+        "required": [
+            "id",
+            "type",
+            "value"
+        ],
+        "properties": {
+            "type": "url",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "url"
+            },
+            "value": {
+                "type": "string",
+                "semantics": "url"
+            }
+        }
+    },
+    "user-account": {
+        "type": "object",
+        "presence-coconstraints": {
+            "property-groups": {
+                "all-props-group": [
+                    "user_id",
+                    "credential",
+                    "account_login",
+                    "account_type",
+                    "display_name",
+                    "is_service_account",
+                    "is_privileged",
+                    "can_escalate_privs",
+                    "is_disabled",
+                    "account_created",
+                    "account_expires",
+                    "credential_last_changed",
+                    "account_first_login",
+                    "account_last_login"
+                ]
+            },
+            "at-least-one": [
+                "all-props-group"
+            ]
+        },
+        "required": [
+            "id",
+            "type",
+            "all-props-group"
+        ],
+        "properties": {
+            "type": "user-account",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "user-account"
+            },
+            "user_id": {
+                "type": "string",
+                "semantics": "user_name"
+            },
+            "credential": {
+                "type": "string",
+                "semantics": "password"
+            },
+            "account_login": {
+                "type": "string",
+                "semantics": "email"
+            },
+            "account_type": {
+                "type": "string",
+                "ref": "account-type-ov"
+            },
+            "display_name": {
+                "type": "string",
+                "semantics": "name"
+            },
+            "is_service_account": {
+                "type": "boolean"
+            },
+            "is_privileged": {
+                "type": "boolean"
+            },
+            "can_escalate_privs": {
+                "type": "boolean"
+            },
+            "is_disabled": {
+                "type": "boolean"
+            },
+            "account_created": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "account_expires": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "credential_last_changed": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "account_first_login": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "account_last_login": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            }
+        }
+    },
+    "vulnerability": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "id",
+            "name",
+            "type"
+        ],
+        "properties": {
+            "type": "vulnerability",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "vulnerability"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
+            }
+        }
+    },
+    "windows-registry-key": {
+        "type": "object",
+        "presence-coconstraints": {
+            "property-groups": {
+                "all-props-group": [
+                    "key",
+                    "values",
+                    "modified_time",
+                    "creator_user_ref",
+                    "number_of_subkeys"
+                ]
+            },
+            "at-least-one": [
+                "all-props-group"
+            ]
+        },
+        "required": [
+            "id",
+            "type",
+            "all-props-group"
+        ],
+        "properties": {
+            "type": "windows-registry-key",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "windows-registry-key"
+            },
+            "key": {
+                "type": "string"
+            },
+            "values": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "presence-coconstraints": {
+                        "property-groups": {
+                            "all-props-group": [
+                                "name",
+                                "data_type",
+                                "data"
+                            ]
+                        },
+                        "at-least-one": [
+                            "all-props-group"
+                        ]
+                    },
+                    "required": [
+                        "all-props-group"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "semantics": "word"
+                        },
+                        "data_type": "REG_SZ",
+                        "data": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "modified_time": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "creator_user_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "user-account"
+            },
+            "number_of_subkeys": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10
+            }
+        }
+    },
+    "x509-certificate": {
+        "type": "object",
+        "value-coconstraints": [
+            "validity_not_before < validity_not_after"
+        ],
+        "presence-coconstraints": {
+            "property-groups": {
+                "all-props-group": [
+                    "is_self_signed",
+                    "hashes",
+                    "version",
+                    "serial_number",
+                    "signature_algorithm",
+                    "issuer",
+                    "validity_not_before",
+                    "validity_not_after",
+                    "subject",
+                    "subject_public_key_algorithm",
+                    "subject_public_key_modulus",
+                    "subject_public_key_exponent"
+                ]
+            },
+            "at-least-one": [
+                "all-props-group"
+            ]
+        },
+        "required": [
+            "id",
+            "type",
+            "all-props-group"
+        ],
+        "properties": {
+            "type": "x509-certificate",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "x509-certificate"
+            },
+            "is_self_signed": {
+                "type": "boolean"
+            },
+            "hashes": {
+                "type": "object",
+                "ref": "hashes"
+            },
+            "version": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 20
+            },
+            "serial_number": {
+                "type": "string"
+            },
+            "signature_algorithm": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "issuer": {
+                "type": "string",
+                "semantics": "company"
+            },
+            "validity_not_before": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "validity_not_after": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "subject": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "subject_public_key_algorithm": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "subject_public_key_modulus": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 999999999999999999999999999999
+            },
+            "subject_public_key_exponent": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 65537
+            }
+        }
+    },
+
+    "relationship": {
+        "type": "object",
+        "import": "common-properties",
+        "value-coconstraints": [
+            "start_time < stop_time"
+        ],
+        "optional": [
+            "description",
+            "start_time",
+            "stop_time"
+        ],
+        "properties": {
+            "type": "relationship",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "relationship"
+            },
+            "relationship_type": "related-to",
+            "description": {
+                "type": "string",
+                "semantics": "paragraph"
+            },
+            "source_ref": {
+                "type": "string",
+                "ref": "sdo-identifier"
+            },
+            "target_ref": {
+                "type": "string",
+                "ref": "sdo-identifier"
+            },
+            "start_time": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "stop_time": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            }
+        }
+    },
+    "sighting": {
+        "type": "object",
+        "import": "common-properties",
+        "value-coconstraints": ["first_seen < last_seen"],
+        "required": [
+            "id", "type", "sighting_of_ref"
+        ],
+        "properties": {
+            "type": "sighting",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "sighting"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
+            },
+            "first_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "last_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 999999999
+            },
+            "sighting_of_ref": {
+                "type": "string",
+                "ref": "sdo-identifier"
+            },
+            "observed_data_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "stix-id",
+                    "stix-type": "observed-data"
+                }
+            },
+            "where_sighted_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "semantics": "stix-id",
+                            "stix-type": "identity"
+                        }, {
+                            "type": "string",
+                            "semantics": "stix-id",
+                            "stix-type": "location"
+                        }
+                    ]
+                }
+            },
+            "summary": {
+                "type": "boolean"
+            }
+        }
+    },
+    "common-properties": {
+        "type": "object",
+        "value-coconstraints": [
+            "created <= modified"
+        ],
+        "required": [
+            "created",
+            "modified",
+            "spec_version"
+        ],
+        "properties": {
+            "created": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            },
+            "confidence": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+            },
+            "spec_version": "2.1",
+            "object_marking_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "stix-id",
+                    "stix-type": "marking-definition"
+                }
+            },
+            "labels": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "word"
+                }
+            },
+            "lang": "en",
+            "external_references": {
+                "type": "array",
+                "ref": "external-references"
+            }
+        }
+    },
+    "sdo-identifier": {
+        "type": "string",
+        "oneOf": [
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "attack-pattern"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "campaign"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "course-of-action"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "grouping"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "indicator"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "infrastructure"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "intrusion-set"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "location"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "malware"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "malware-analysis"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "note"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "observed-data"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "opinion"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "report"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "threat-actor"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "tool"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "vulnerability"
+            }
+        ]
+    },
+    "sco-identifier": {
+        "type": "string",
+        "oneOf": [
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "artifact"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "autonomous-system"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "directory"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "domain-name"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "email-addr"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "email-message"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "file"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "ipv4-addr"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "ipv6-addr"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "mac-addr"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "mutex"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "network-traffic"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "process"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "software"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "url"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "user-account"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "windows-registry-key"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "x509-certificate"
+            }
+        ]
+    },
+    "array-of-sdo-identifiers": {
+        "type": "array",
+        "items": {
+            "type": "string",
+            "ref": "sdo-identifier"
+        }
+    },
+    "array-of-sco-identifiers": {
+        "type": "array",
+        "items": {
+            "type": "string",
+            "ref": "sco-identifier"
+        }
+    },
+    "kill-chain-phases": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "kill_chain_name": {
+                            "type": "string"
+                        },
+                        "phase_name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "kill_chain_name": "lockheed-martin-cyber-kill-chain",
+                        "phase_name": {
+                            "type": "string",
+                            "oneOf": [
+                                "reconnaissance",
+                                "weaponization",
+                                "delivery",
+                                "exploitation",
+                                "installation",
+                                "command and control",
+                                "actions on objective"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "external-references": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "presence-coconstraints": {
+                "property-groups": {
+                    "req-props-group": [
+                        "description",
+                        "url",
+                        "external_id"
+                    ]
+                },
+                "at-least-one": [
+                    "req-props-group"
+                ]
+            },
+            "required": [
+                "source_name",
+                "req-props-group"
+            ],
+            "properties": {
+                "source_name": {
+                    "type": "string",
+                    "semantics": "word"
+                },
+                "description": {
+                    "type": "string",
+                    "semantics": "sentence"
+                },
+                "url": {
+                    "type": "string",
+                    "semantics": "url"
+                },
+                "hashes": {
+                    "type": "object",
+                    "ref": "hashes"
+                },
+                "external_id": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "hashes": {
+        "type": "object",
+        "presence-coconstraints": {
+            "property-groups": {
+                "all-props": [
+                    "MD5",
+                    "SHA-1",
+                    "SHA-256",
+                    "SHA-512",
+                    "SHA3-256",
+                    "SHA3-512"
+                ]
+            },
+            "at-least-one": [
+                "all-props"
+            ]
+        },
+        "properties": {
+            "MD5": {
+                "type": "string",
+                "semantics": "md5"
+            },
+            "SHA-1": {
+                "type": "string",
+                "semantics": "sha1"
+            },
+            "SHA-256": {
+                "type": "string",
+                "semantics": "sha256"
+            },
+            "SHA-512": {
+                "type": "string",
+                "semantics": "sha512"
+            },
+            "SHA3-256": {
+                "type": "string",
+                "semantics": "sha3_256"
+            },
+            "SHA3-512": {
+                "type": "string",
+                "semantics": "sha3_512"
+            }
+        }
+    },
+    "account-type-ov": {
+        "type": "string",
+        "oneOf": [
+            "facebook",
+            "ldap",
+            "nis",
+            "openid",
+            "radius",
+            "skype",
+            "tacas",
+            "twitter",
+            "unix",
+            "windows-local",
+            "windows-domain"
+        ]
+    },
+    "attack-motivation-ov": {
+        "type": "string",
+        "oneOf": [
+            "accidental",
+            "coercion",
+            "dominance",
+            "ideology",
+            "notoriety",
+            "organizational-gain",
+            "personal-gain",
+            "personal-satisfaction",
+            "revenge",
+            "unpredictable"
+        ]
+    },
+    "attack-resource-level-ov": {
+        "type": "string",
+        "oneOf": [
+            "individual",
+            "club",
+            "contest",
+            "team",
+            "organization",
+            "government"
+        ]
+    },
+    "encryption-algorithm-enum": {
+        "type": "string",
+        "oneOf": [
+            "AES-256-GCM",
+            "ChaCha20-Poly1305",
+            "mime-type-indicated"
+        ]
+    },
+    "grouping-context-ov": {
+        "type": "string",
+        "oneOf": [
+            "suspicious-activity",
+            "malware-analysis",
+            "unspecified"
+        ]
+    },
+    "hashing-algorithm-ov": {
+        "type": "string",
+        "oneOf": [
+            "MD5",
+            "SHA-1",
+            "SHA-256",
+            "SHA-512",
+            "SHA3-256",
+            "SHA3-512",
+            "SSDEEP"
+        ]
+    },
+    "identity-class-ov": {
+        "type": "string",
+        "oneOf": [
+            "individual",
+            "group",
+            "system",
+            "organization",
+            "class",
+            "unknown"
+        ]
+    },
+    "implementation-language-ov": {
+        "type": "string",
+        "oneOf": [
+            "applescript",
+            "bash",
+            "c",
+            "c++",
+            "c#",
+            "go",
+            "java",
+            "javascript",
+            "lua",
+            "objective-c",
+            "perl",
+            "php",
+            "powershell",
+            "python",
+            "ruby",
+            "scala",
+            "swift",
+            "typescript",
+            "visual-basic",
+            "x86-32",
+            "x86-64"
+        ]
+    },
+    "indicator-type-ov": {
+        "type": "string",
+        "oneOf": [
+            "anomalous-activity",
+            "anonymization",
+            "benign",
+            "compromised",
+            "malicious-activity",
+            "attribution",
+            "unknown"
+        ]
+    },
+    "industry-sector-ov": {
+        "type": "string",
+        "oneOf": [
+            "agriculture",
+            "aerospace",
+            "automotive",
+            "chemical",
+            "commercial",
+            "communications",
+            "construction",
+            "defense",
+            "education",
+            "energy",
+            "entertainment",
+            "financial-services",
+            "government",
+            "emergency-services",
+            "government-national",
+            "government-regional",
+            "government-local",
+            "government-public-services",
+            "healthcare",
+            "hospitality-leisure",
+            "infrastructure",
+            "dams",
+            "nuclear",
+            "water",
+            "insurance",
+            "manufacturing",
+            "mining",
+            "non-profit",
+            "pharmaceuticals",
+            "retail",
+            "technology",
+            "telecommunications",
+            "transportation",
+            "utilities"
+        ]
+    },
+    "infrastructure-type-ov": {
+        "type": "string",
+        "oneOf": [
+            "amplification",
+            "anonymization",
+            "botnet",
+            "command-and-control",
+            "exfiltration",
+            "hosting-malware",
+            "hosting-target-lists",
+            "phishing",
+            "reconnaissance",
+            "staging",
+            "unknown"
+        ]
+    },
+    "malware-result-ov": {
+        "type": "string",
+        "oneOf": [
+            "malicious",
+            "suspicious",
+            "benign",
+            "unknown"
+        ]
+    },
+    "malware-capabilities-ov": {
+        "type": "string",
+        "oneOf": [
+            "accesses-remote-machines",
+            "anti-debugging",
+            "anti-disassembly",
+            "anti-emulation",
+            "anti-memory-forensics",
+            "anti-sandbox",
+            "anti-vm",
+            "captures-input-peripherals",
+            "captures-output-peripherals",
+            "captures-system-state-data",
+            "cleans-traces-of-infection",
+            "commits-fraud",
+            "communicates-with-c2",
+            "compromises-data-availability",
+            "compromises-data-integrity",
+            "compromises-system-availability",
+            "controls-local-machine",
+            "degrades-security-software",
+            "degrades-system-updates",
+            "determines-c2-server",
+            "emails-spam",
+            "escalates-privileges",
+            "evades-av",
+            "exfiltrates-data",
+            "fingerprints-host",
+            "hides-artifacts",
+            "hides-executing-code",
+            "infects-files",
+            "infects-remote-machines",
+            "installs-other-components",
+            "persists-after-system-reboot",
+            "prevents-artifact-access",
+            "prevents-artifact-deletion",
+            "probes-network-environment",
+            "self-modifies",
+            "steals-authentication-credentials",
+            "violates-system-operational-integrity"
+        ]
+    },
+    "malware-type-ov": {
+        "type": "string",
+        "oneOf": [
+            "adware",
+            "backdoor",
+            "bot",
+            "bootkit",
+            "ddos",
+            "downloader",
+            "dropper",
+            "exploit-kit",
+            "keylogger",
+            "ransomware",
+            "remote-access-trojan",
+            "resource-exploitation",
+            "rogue-security-software",
+            "rootkit",
+            "screen-capture",
+            "spyware",
+            "trojan",
+            "unknown",
+            "virus",
+            "webshell",
+            "wiper",
+            "worm"
+        ]
+    },
+    "network-socket-address-family-enum": {
+        "type": "string",
+        "oneOf": [
+            "AF_UNSPEC",
+            "AF_INET",
+            "AF_IPX",
+            "AF_APPLETALK",
+            "AF_NETBIOS",
+            "AF_INET6",
+            "AF_IRDA",
+            "AF_BTH"
+        ]
+    },
+    "network-socket-type-enum": {
+        "type": "string",
+        "oneOf": [
+            "SOCK_STREAM",
+            "SOCK_DGRAM",
+            "SOCK_RAW",
+            "SOCK_RDM",
+            "SOCK_SEQPACKET"
+        ]
+    },
+    "opinion-enum": {
+        "type": "string",
+        "oneOf": [
+            "strongly-disagree",
+            "disagree",
+            "neutral",
+            "agree",
+            "strongly-agree"
+        ]
+    },
+    "processor-architecture-ov": {
+        "type": "string",
+        "oneOf": [
+            "alpha",
+            "arm",
+            "ia-64",
+            "mips",
+            "powerpc",
+            "sparc",
+            "x86",
+            "x86-64"
+        ]
+    },
+    "region-ov": {
+        "type": "string",
+        "oneOf": [
+            "africa",
+            "eastern-africa",
+            "middle-africa",
+            "northern-africa",
+            "southern-africa",
+            "western-africa",
+            "americas",
+            "latin-america-caribbean",
+            "south-america",
+            "caribbean",
+            "central-america",
+            "northern-america",
+            "asia",
+            "central-asia",
+            "eastern-asia",
+            "southern-asia",
+            "south-eastern-asia",
+            "western-asia",
+            "europe",
+            "eastern-europe",
+            "northern-europe",
+            "southern-europe",
+            "western-europe",
+            "oceania",
+            "antarctica",
+            "australia-new-zealand",
+            "melanesia",
+            "micronesia",
+            "polynesia"
+        ]
+    },
+    "report-type-ov": {
+        "type": "string",
+        "oneOf": [
+            "attack-pattern",
+            "campaign",
+            "identity",
+            "indicator",
+            "intrusion-set",
+            "malware",
+            "observed-data",
+            "threat-actor",
+            "threat-report",
+            "tool",
+            "vulnerability"
+        ]
+    },
+    "threat-actor-role-ov": {
+        "type": "string",
+        "oneOf": [
+            "agent",
+            "director",
+            "independent",
+            "infrastructure-architect",
+            "infrastructure-operator",
+            "malware-author",
+            "sponsor"
+        ]
+    },
+    "threat-actor-sophistication-ov": {
+        "type": "string",
+        "oneOf": [
+            "none",
+            "minimal",
+            "intermediate",
+            "advanced",
+            "expert",
+            "innovator",
+            "strategic"
+        ]
+    },
+    "threat-actor-type-ov": {
+        "type": "string",
+        "oneOf": [
+            "activist",
+            "competitor",
+            "crime-syndicate",
+            "criminal",
+            "hacker",
+            "insider-accidental",
+            "insider-disgruntled",
+            "nation-state",
+            "sensationalist",
+            "spy",
+            "terrorist",
+            "unknown"
+        ]
+    },
+    "tool-type-ov": {
+        "type": "string",
+        "oneOf": [
+            "denial-of-service",
+            "exploitation",
+            "information-gathering",
+            "network-capture",
+            "credential-exploitation",
+            "remote-access",
+            "vulnerability-scanning",
+            "unknown"
+        ]
+    },
+    "windows-integrity-level-enum": {
+        "type": "string",
+        "oneOf": [
+            "low",
+            "medium",
+            "high",
+            "system"
+        ]
+    },
+    "windows-pebinary-type-ov": {
+        "type": "string",
+        "oneOf": [
+            "dll",
+            "exe",
+            "sys"
+        ]
+    },
+    "windows-registry-datatype-enum": {
+        "type": "string",
+        "oneOf": [
+            "REG_NONE",
+            "REG_SZ",
+            "REG_EXPAND_SZ",
+            "REG_BINARY",
+            "REG_DWORD",
+            "REG_DWORD_BIG_ENDIAN",
+            "REG_DWORD_LITTLE_ENDIAN",
+            "REG_LINK",
+            "REG_MULTI_SZ",
+            "REG_RESOURCE_LIST",
+            "REG_FULL_RESOURCE_DESCRIPTION",
+            "REG_RESOURCE_REQUIREMENTS_LIST",
+            "REG_QWORD",
+            "REG_INVALID_TYPE"
+        ]
+    },
+    "windows-service-start-type-enum": {
+        "type": "string",
+        "oneOf": [
+            "SERVICE_AUTO_START",
+            "SERVICE_BOOT_START",
+            "SERVICE_DEMAND_START",
+            "SERVICE_DISABLED",
+            "SERVICE_SYSTEM_ALERT"
+        ]
+    },
+    "windows-service-type-enum": {
+        "type": "string",
+        "oneOf": [
+            "SERVICE_KERNEL_DRIVER",
+            "SERVICE_FILE_SYSTEM_DRIVER",
+            "SERVICE_WIN32_OWN_PROCESS",
+            "SERVICE_WIN32_SHARE_PROCESS"
+        ]
+    },
+    "windows-service-status-enum": {
+        "type": "string",
+        "oneOf": [
+            "SERVICE_CONTINUE_PENDING",
+            "SERVICE_PAUSE_PENDING",
+            "SERVICE_PAUSED",
+            "SERVICE_RUNNING",
+            "SERVICE_START_PENDING",
+            "SERVICE_STOP_PENDING",
+            "SERVICE_STOPPED"
+        ]
+    },
+
+    "Artifact": {
+        "type": "object",
+        "ref": "artifact"
+    },
+    "Attack_Pattern": {
+        "type": "object",
+        "ref": "attack-pattern"
+    },
+    "Autonomous_System": {
+        "type": "object",
+        "ref": "autonomous-system"
+    },
+    "Campaign": {
+        "type": "object",
+        "ref": "campaign"
+    },
+    "Course_of_Action": {
+        "type": "object",
+        "ref": "course-of-action"
+    },
+    "Directory": {
+        "type": "object",
+        "ref": "directory"
+    },
+    "Domain_Name": {
+        "type": "object",
+        "ref": "domain-name"
+    },
+    "Email_Address": {
+        "type": "object",
+        "ref": "email-addr"
+    },
+    "Email_Message": {
+        "type": "object",
+        "ref": "email-message"
+    },
+    "File": {
+        "type": "object",
+        "ref": "file"
+    },
+    "Grouping": {
+        "type": "object",
+        "ref": "grouping"
+    },
+    "Identity": {
+        "type": "object",
+        "ref": "identity"
+    },
+    "Indicator": {
+        "type": "object",
+        "ref": "indicator"
+    },
+    "Infrastructure": {
+        "type": "object",
+        "ref": "infrastructure"
+    },
+    "Intrusion_Set": {
+        "type": "object",
+        "ref": "intrusion-set"
+    },
+    "IPv4_Address": {
+        "type": "object",
+        "ref": "ipv4-addr"
+    },
+    "IPv6_Address": {
+        "type": "object",
+        "ref": "ipv6-addr"
+    },
+    "Location": {
+        "type": "object",
+        "ref": "location"
+    },
+    "Malware": {
+        "type": "object",
+        "ref": "malware"
+    },
+    "Malware_Analysis": {
+        "type": "object",
+        "ref": "malware-analysis"
+    },
+    "Marking_Definition": {
+        "type": "object",
+        "ref": "marking-definition"
+    },
+    "MAC_Address": {
+        "type": "object",
+        "ref": "mac-addr"
+    },
+    "Mutex": {
+        "type": "object",
+        "ref": "mutex"
+    },
+    "Network_Traffic": {
+        "type": "object",
+        "ref": "network-traffic"
+    },
+    "Note": {
+        "type": "object",
+        "ref": "note"
+    },
+    "Observed_Data": {
+        "type": "object",
+        "ref": "observed-data"
+    },
+    "Opinion": {
+        "type": "object",
+        "ref": "opinion"
+    },
+    "Process": {
+        "type": "object",
+        "ref": "process"
+    },
+    "Report": {
+        "type": "object",
+        "ref": "report"
+    },
+    "Software": {
+        "type": "object",
+        "ref": "software"
+    },
+    "Threat_Actor": {
+        "type": "object",
+        "ref": "threat-actor"
+    },
+    "Tool": {
+        "type": "object",
+        "ref": "tool"
+    },
+    "URL": {
+        "type": "object",
+        "ref": "url"
+    },
+    "User_Account": {
+        "type": "object",
+        "ref": "user-account"
+    },
+    "Vulnerability": {
+        "type": "object",
+        "ref": "vulnerability"
+    },
+    "Windows_Registry_Key": {
+        "type": "object",
+        "ref": "windows-registry-key"
+    },
+    "X509_Certificate": {
+        "type": "object",
+        "ref": "x509-certificate"
+    }
+}

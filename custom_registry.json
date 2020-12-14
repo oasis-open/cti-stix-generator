@@ -1,0 +1,31 @@
+{
+    "Foobar": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["id", "some-property", "type"],
+        "properties": {
+            "type": "x-foobar",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "x-foobar"
+            },
+            "some-property": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "another-property": {
+                "type": "string",
+                "semantics": "sentence"
+            }
+        }
+    },
+    "User_Account": {
+        "required": ["id", "type", "all-props-group", "x_foo"],
+        "properties": {
+            "x_foo": {
+                "type": "string"
+            }
+        }
+    }
+}
