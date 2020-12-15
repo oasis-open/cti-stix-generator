@@ -40,11 +40,12 @@ The commandline version of the tool reads prototyping language from a file, and
 prints the generated objects to stdout.  If a bundle is selected, the bundle is
 printed instead.
 
-.. code-block::
+::
 
-    usage: build_stix.py [-h] [-b] [-e ENCODING] [-v] [--stix-version {2.0,2.1}]
-                         [--extra-specs EXTRA_SPECS] [-m]
-                         language-file
+    usage: build_stix.py [-h] [-b] [-e ENCODING] [-v]
+                     [--stix-version {2.0,2.1}]
+                     [--extra-specs EXTRA_SPECS] [-n] [-c CONFIG]
+                     language-file
 
     Create STIX content from the STIX prototyping language
 
@@ -56,19 +57,23 @@ printed instead.
       -b, --bundle          Create a bundle
       -e ENCODING, --encoding ENCODING
                             Encoding to use when reading text files, e.g. STIX
-                            prototyping language, custom generator specifications,
-                            etc. Default=utf-8
-      -v, --verbose         Enable verbose diagnostic output. Repeat for increased
-                            verbosity.
+                            prototyping language, custom generator
+                            specifications, etc. Default=utf-8
+      -v, --verbose         Enable verbose diagnostic output. Repeat for
+                            increased verbosity.
       --stix-version {2.0,2.1}
                             STIX version to use. Default=2.1
       --extra-specs EXTRA_SPECS
                             A JSON file with extra object generator
-                            specifications. These will be merged with the built-in
-                            specifications, and made available for use in
-                            prototyping language content.
-      -m, --minimize-refs   Minimize reference properties in generated objects
-                            (*_ref and *_refs).
+                            specifications. These will be merged with the
+                            built-in specifications, and made available for
+                            use in prototyping language content.
+      -n, --embed-variable-names
+                            Embed variable names in generated objects using a
+                            custom property.
+      -c CONFIG, --config CONFIG
+                            Config file with options to customize how content
+                            is generated.
 
 Caveats
 -------
