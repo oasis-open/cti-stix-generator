@@ -56,7 +56,7 @@ JSON-Schema and seemed useful to include.  More specifically, being a Python
 library, it generates JSON-serializable values.  The mapping between JSON and
 Python types is as follows:
 
-+========+============+
++--------+------------+
 |  JSON  |   Python   |
 +========+============+
 | string | str/unicode|
@@ -72,7 +72,7 @@ Python types is as follows:
 | array  | list       |
 +--------+------------+
 | object | dict       |
-+========+============+
++--------+------------+
 
 The reverse mapping also holds, where ``int`` always maps to the generator's
 integer type.
@@ -108,20 +108,20 @@ types are given below.
 String Specifications
 ^^^^^^^^^^^^^^^^^^^^^
 
-+===========+===========================|
++-----------+---------------------------+
 | Property  |      Description          |
-+===========+===========================|
++===========+===========================+
 | minLength | The minimum string length |
 +-----------+---------------------------+
 | maxLength | The maximum string length |
-+===========+===========================|
++-----------+---------------------------+
 
 A string of a random length with a random mix of characters is generated.
 
 Number Specifications
 ^^^^^^^^^^^^^^^^^^^^^
 
-+==================+===============================+
++------------------+-------------------------------+
 |     Property     |          Description          |
 +==================+===============================+
 | minimum          | The minimum value (inclusive) |
@@ -131,14 +131,14 @@ Number Specifications
 | exclusiveMinimum | The minimum value (exclusive) |
 +------------------+-------------------------------+
 | exclusiveMaximum | The maximum value (exclusive) |
-+==================+===============================+
++------------------+-------------------------------+
 
 A random floating point number is generated within the given bounds.
 
 Integer Specifications
 ^^^^^^^^^^^^^^^^^^^^^^
 
-+==================+===============================+
++------------------+-------------------------------+
 |     Property     |          Description          |
 +==================+===============================+
 | minimum          | The minimum value (inclusive) |
@@ -148,7 +148,7 @@ Integer Specifications
 | exclusiveMinimum | The minimum value (exclusive) |
 +------------------+-------------------------------+
 | exclusiveMaximum | The maximum value (exclusive) |
-+==================+===============================+
++------------------+-------------------------------+
 
 A random integer is generated within the given bounds.  The bounds need not be
 integers.
@@ -167,7 +167,7 @@ True or False with equal probability.
 Array Specifications
 ^^^^^^^^^^^^^^^^^^^^
 
-+==========+===========================================+
++----------+-------------------------------------------+
 | Property |                Description                |
 +==========+===========================================+
 | minItems | The minimum array length                  |
@@ -175,7 +175,7 @@ Array Specifications
 | maxItems | The maximum array length                  |
 +----------+-------------------------------------------+
 | items    | A specification use to generate all items |
-+==========+===========================================+
++----------+-------------------------------------------+
 
 A list of random length is generated, where each element is generated via the
 ``items`` specification.
@@ -183,21 +183,21 @@ A list of random length is generated, where each element is generated via the
 Object Specifications
 ^^^^^^^^^^^^^^^^^^^^^
 
-+========================+=========================================================+
-|       Property         |                        Description                      |
-+========================+=========================================================+
-| properties             | A dict containing property names and their specifications|
-+------------------------+---------------------------------------------------------+
-| import                 | The name of another object specification                 |
-+------------------------+---------------------------------------------------------+
-| required               | A list of required property names/groups                 |
-+------------------------+---------------------------------------------------------+
-| optional               | A list of optional property names/groups                 |
-+------------------------+---------------------------------------------------------+
-| value-coconstraints    | Value co-constraints                                     |
-+------------------------+---------------------------------------------------------+
-| presence-coconstraints | Presence co-constraints                                  |
-+========================+=========================================================+
++------------------------+-----------------------------------------------------------+
+|       Property         |                        Description                        |
++========================+===========================================================+
+| properties             | A dict containing property names and their specifications |
++------------------------+-----------------------------------------------------------+
+| import                 | The name of another object specification                  |
++------------------------+-----------------------------------------------------------+
+| required               | A list of required property names/groups                  |
++------------------------+-----------------------------------------------------------+
+| optional               | A list of optional property names/groups                  |
++------------------------+-----------------------------------------------------------+
+| value-coconstraints    | Value co-constraints                                      |
++------------------------+-----------------------------------------------------------+
+| presence-coconstraints | Presence co-constraints                                   |
++------------------------+-----------------------------------------------------------+
 
 A dict is generated according to the given constraints and specifications.
 This specification type is the most complicated.  All STIX objects map to this
@@ -339,7 +339,7 @@ support listing these groups, in addition to ordinary properties.
 Putting the co-constraint type and optionality together, one can obtain a
 variety of presence co-constraint behaviors:
 
-+==========+=================+=======================================================================================================================================================================+
++----------+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | required | constraint type |                    description                                                                                                                                        |
 +==========+=================+=======================================================================================================================================================================+
 | yes      | one             | Exactly one property of the group must be present.                                                                                                                    |
@@ -353,7 +353,7 @@ variety of presence co-constraint behaviors:
 | yes      | at-least-one    | At least one property from the group must be present.                                                                                                                 |
 +----------+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | no       | at-least-one    | All properties are optional.  This is the same as making all properties individually optional.  It is preferable to do that instead of using a presence co-constraint.|
-+==========+=================+=======================================================================================================================================================================+
++----------+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Asymmetric Presence Co-constraints
 **********************************
