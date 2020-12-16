@@ -268,6 +268,7 @@ be counterintuitive, and requires some understanding of the library
 architecture.
 
 The library is composed of two components:
+
 1. A language "processor"
 2. An object generator
 

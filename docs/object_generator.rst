@@ -259,7 +259,7 @@ between them.  The valid operators are ``=``, ``!=``, ``<``, ``<=``, ``>``,
 
 Enforcement of value co-constraints is severely restricted.  It was only found
 to be necessary for timestamp-valued properties of certain objects, so they
-are currently only propagated to [semantics](#semantics) implementations, and
+are currently only propagated to `semantics <#semantics>`__ implementations, and
 only the ``stix-timestamp`` semantics currently honors them.
 
 For example:
@@ -333,7 +333,7 @@ Symmetric Presence Co-constraints
 The essential construct of a symmetric presence co-constraint is the property
 group.  One then assigns a constraint type to the group, of which three are
 supported: ``one``, ``all``, and ``at-least-one``.  In addition, the
-``required`` and `optional` properties of object specifications are enhanced to
+``required`` and ``optional`` properties of object specifications are enhanced to
 support listing these groups, in addition to ordinary properties.
 
 Putting the co-constraint type and optionality together, one can obtain a
