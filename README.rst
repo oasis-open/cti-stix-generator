@@ -33,6 +33,10 @@ To use the notebook locally, install the generator's dependencies including the 
     jupyter nbextension enable stix2viz --py
     jupyter notebook
 
+.. note::
+
+   If you are using the JupyterLab interface, the STIX generator notebook extension can only be used in classic mode.
+
 Commandline Tool
 ----------------
 
