@@ -132,10 +132,10 @@ Questions or comments about this TC Open Repository's activities should be compo
 
 Please send general questions about TC Open Repository participation to OASIS Staff at repository-admin@oasis-open.org and any specific CLA-related questions to repository-cla@oasis-open.org.
 
-.. |Build_Status| image:: https://api.travis-ci.com/oasis-open/cti-stix-generator.svg?branch=master
-   :target: https://travis-ci.com/oasis-open/cti-stix-generator
+.. |Build_Status| image:: https://github.com/oasis-open/cti-stix-generator/workflows/cti-stix-generator%20test%20harness/badge.svg
+   :target: https://github.com/oasis-open/cti-stix-generator/actions?query=workflow%3A%22cti-stix-generator+test+harness%22
 .. |Coverage| image:: https://codecov.io/gh/oasis-open/cti-stix-generator/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/oasis-open/cti-stix-validator
+   :target: https://codecov.io/gh/oasis-open/cti-stix-generator
 .. |Version| image:: https://img.shields.io/pypi/v/stix2-generator.svg?maxAge=3600
    :target: https://pypi.org/project/stix2-generator/
 .. |Binder| image:: https://mybinder.org/badge_logo.svg
