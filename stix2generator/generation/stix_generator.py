@@ -61,8 +61,8 @@ def _random_id_of_types(by_type, *types, stix_version="2.1"):
     num_ids = sum(
         len(ids)
         for type_, ids in by_type.items()
-        if stix2generator.utils.is_stix_type(
-            type_, *types, stix_version=stix_version
+        if stix2.utils.is_stix_type(
+            type_, stix_version, *types
         )
     )
 
@@ -73,8 +73,8 @@ def _random_id_of_types(by_type, *types, stix_version="2.1"):
         id_iter = itertools.chain.from_iterable(
             ids
             for type_, ids in by_type.items()
-            if stix2generator.utils.is_stix_type(
-                type_, *types, stix_version=stix_version
+            if stix2.utils.is_stix_type(
+                type_, stix_version, *types
             )
         )
 
@@ -96,11 +96,11 @@ def _is_sro_connectable(obj_or_type, stix_version):
     :param stix_version: A STIX version as a string
     :return: True if the type is connectable via SRO; False if not
     """
-    return stix2generator.utils.is_stix_type(
+    return stix2.utils.is_stix_type(
         obj_or_type,
-        stix2generator.utils.STIXTypeClass.SDO,
-        stix2generator.utils.STIXTypeClass.SCO,
-        stix_version=stix_version
+        stix_version,
+        stix2.utils.STIXTypeClass.SDO,
+        stix2.utils.STIXTypeClass.SCO,
     )
 
 
@@ -116,9 +116,9 @@ def _random_sro_connectable_id(by_type, stix_version):
     """
     return _random_id_of_types(
         by_type,
-        stix2generator.utils.STIXTypeClass.SDO,
-        stix2generator.utils.STIXTypeClass.SCO,
-        stix_version=stix_version
+        stix_version,
+        stix2.utils.STIXTypeClass.SDO,
+        stix2.utils.STIXTypeClass.SCO,
     )
 
 
@@ -325,7 +325,7 @@ class STIXGenerator:
         :param by_type: Additional bookkeeping: a map from STIX type to a list
             of IDs of STIX objects in the current graph of that type
         :param required_types: Type constraints, as a sequence of STIX type
-            strings and/or stix2generator.utils.STIXTypeClass enum values.  A
+            strings and/or stix2.utils.STIXTypeClass enum values.  A
             type constraint must be given, otherwise no satisfying type will
             exist.
         :return: A STIX ID whose type satisfies the given type constraints
@@ -398,7 +398,7 @@ class STIXGenerator:
         """
 
         if any(
-                stix2generator.utils.is_sdo(type_, self.__stix_version)
+                stix2.utils.is_sdo(type_, self.__stix_version)
                 for type_ in by_type
         ):
             sighting = self.__object_generator.generate("sighting")
@@ -438,7 +438,7 @@ class STIXGenerator:
 
                 # Connect via sighting_of_ref
                 sighting_of_id = _random_id_of_types(
-                    by_type, stix2generator.utils.STIXTypeClass.SDO,
+                    by_type, stix2.utils.STIXTypeClass.SDO,
                     stix_version=self.__stix_version
                 )
                 sighting["sighting_of_ref"] = sighting_of_id
@@ -447,7 +447,7 @@ class STIXGenerator:
             # not connect to existing graph nodes.
             if sighting["sighting_of_ref"] not in by_id:
                 sighting["sighting_of_ref"] = self.__random_get_id(
-                    by_id, by_type, stix2generator.utils.STIXTypeClass.SDO
+                    by_id, by_type, stix2.utils.STIXTypeClass.SDO
                 )
 
             if observed_data_refs:
@@ -566,8 +566,8 @@ class STIXGenerator:
             # type.  So just use related-to with a random type.
 
             endpoint_type2 = self.__random_generatable_stix_type(
-                stix2generator.utils.STIXTypeClass.SDO,
-                stix2generator.utils.STIXTypeClass.SCO
+                stix2.utils.STIXTypeClass.SDO,
+                stix2.utils.STIXTypeClass.SCO
             )
             endpoint_object2 = self.__object_generator.generate(
                 endpoint_type2
@@ -607,7 +607,7 @@ class STIXGenerator:
         """
 
         if not seed_type:
-            seed_type = stix2generator.utils.STIXTypeClass.SDO
+            seed_type = stix2.utils.STIXTypeClass.SDO
 
         # Might seem kinda silly if seed_type is directly given as a string,
         # but this ensures that the given seed type is actually generatable

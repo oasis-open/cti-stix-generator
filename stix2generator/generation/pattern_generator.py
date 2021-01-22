@@ -244,7 +244,7 @@ class PatternGenerator:
     def __random_sco_type(self):
         return stix2generator.utils.random_generatable_stix_type(
             self.__generator,
-            stix2generator.utils.STIXTypeClass.SCO,
+            stix2.utils.STIXTypeClass.SCO,
             stix_version=self.__stix_version
         )
 

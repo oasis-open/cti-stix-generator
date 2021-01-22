@@ -1,6 +1,7 @@
 # Unit tests for the (top-level) utils module.
 import pytest
 
+import stix2.utils
 import stix2generator.utils
 
 
@@ -44,168 +45,14 @@ def test_find_references_assignable(obj):
 
 
 @pytest.mark.parametrize(
-    "obj_or_type, stix_version, expected", [
-        ("identity", "2.1", True),
-        ("identity", "2.0", True),
-        ("ipv4-addr", "2.1", False),
-        ("ipv4-addr", "2.0", False),
-        ("bundle", "2.1", False),
-        ("bundle", "2.0", False),
-        ("marking-definition", "2.1", False),
-        ("marking-definition", "2.0", False),
-        ("foobar", "2.1", False),
-        ("foobar", "2.0", False),
-        ("relationship", "2.1", False),
-        ("relationship", "2.0", False),
-        ({"type": "malware-analysis", "foo": 1}, "2.1", True),
-        ({"type": "malware-analysis", "foo": 1}, "2.0", False)
-    ]
-)
-def test_is_sdo(obj_or_type, stix_version, expected):
-    assert stix2generator.utils.is_sdo(obj_or_type, stix_version) is expected
-    assert stix2generator.utils.is_stix_type(
-        obj_or_type, stix2generator.utils.STIXTypeClass.SDO,
-        stix_version=stix_version
-    ) is expected
-
-
-@pytest.mark.parametrize(
-    "obj_or_type, stix_version, expected", [
-        ("identity", "2.1", False),
-        ("identity", "2.0", False),
-        ("ipv4-addr", "2.1", True),
-        ("ipv4-addr", "2.0", True),
-        ("bundle", "2.1", False),
-        ("bundle", "2.0", False),
-        ("marking-definition", "2.1", False),
-        ("marking-definition", "2.0", False),
-        ("foobar", "2.1", False),
-        ("foobar", "2.0", False),
-        ("relationship", "2.1", False),
-        ("relationship", "2.0", False),
-        ({"type": "mutex", "foo": 1}, "2.1", True),
-        ({"type": "mutex", "foo": 1}, "2.0", True)
-    ]
-)
-def test_is_sco(obj_or_type, stix_version, expected):
-    assert stix2generator.utils.is_sco(obj_or_type, stix_version) is expected
-    assert stix2generator.utils.is_stix_type(
-        obj_or_type, stix2generator.utils.STIXTypeClass.SCO,
-        stix_version=stix_version
-    ) is expected
-
-
-@pytest.mark.parametrize(
-    "obj_or_type, stix_version, expected", [
-        ("identity", "2.1", False),
-        ("identity", "2.0", False),
-        ("ipv4-addr", "2.1", False),
-        ("ipv4-addr", "2.0", False),
-        ("bundle", "2.1", False),
-        ("bundle", "2.0", False),
-        ("marking-definition", "2.1", False),
-        ("marking-definition", "2.0", False),
-        ("foobar", "2.1", False),
-        ("foobar", "2.0", False),
-        ("relationship", "2.1", True),
-        ("relationship", "2.0", True),
-        ("sighting", "2.1", True),
-        ("sighting", "2.0", True),
-        ({"type": "mutex", "foo": 1}, "2.1", False),
-        ({"type": "mutex", "foo": 1}, "2.0", False)
-    ]
-)
-def test_is_sro(obj_or_type, stix_version, expected):
-    assert stix2generator.utils.is_sro(obj_or_type, stix_version) is expected
-    assert stix2generator.utils.is_stix_type(
-        obj_or_type, stix2generator.utils.STIXTypeClass.SRO,
-        stix_version=stix_version
-    ) is expected
-
-
-@pytest.mark.parametrize(
-    "obj_or_type, stix_version, expected", [
-        ("identity", "2.1", True),
-        ("identity", "2.0", True),
-        ("ipv4-addr", "2.1", True),
-        ("ipv4-addr", "2.0", True),
-        ("bundle", "2.1", True),
-        ("bundle", "2.0", True),
-        ("marking-definition", "2.1", True),
-        ("marking-definition", "2.0", True),
-        ("foobar", "2.1", False),
-        ("foobar", "2.0", False),
-        ("relationship", "2.1", True),
-        ("relationship", "2.0", True),
-        ({"type": "mutex", "foo": 1}, "2.1", True),
-        ({"type": "mutex", "foo": 1}, "2.0", True)
-    ]
-)
-def test_is_object(obj_or_type, stix_version, expected):
-    assert stix2generator.utils.is_object(obj_or_type, stix_version) is expected
-
-
-@pytest.mark.parametrize(
-    "obj_or_type, constraints, expected", [
-        (
-            "identity", (
-                stix2generator.utils.STIXTypeClass.SDO,
-                stix2generator.utils.STIXTypeClass.SCO
-            ),
-            True
-        ),
-        (
-            "identity", (
-                "identity",
-                stix2generator.utils.STIXTypeClass.SCO
-            ),
-            True
-        ),
-        (
-            "identity", (
-                stix2generator.utils.STIXTypeClass.SDO,
-                "malware"
-            ),
-            True
-        ),
-        (
-            "identity", (
-                "location",
-                "identity"
-            ),
-            True
-        ),
-        (
-            "identity", (
-                "location",
-                "malware"
-            ),
-            False
-        ),
-        (
-            "foobar", (
-                "location",
-                "malware"
-            ),
-            False
-        ),
-    ]
-)
-def test_is_stix_type(obj_or_type, constraints, expected):
-    assert stix2generator.utils.is_stix_type(
-        obj_or_type, *constraints, stix_version="2.1"
-    ) is expected
-
-
-@pytest.mark.parametrize(
     "constraints", [
         (("identity",)),
         (("identity", "location")),
-        ((stix2generator.utils.STIXTypeClass.SDO, "url")),
-        (("campaign", stix2generator.utils.STIXTypeClass.SCO)),
+        ((stix2.utils.STIXTypeClass.SDO, "url")),
+        (("campaign", stix2.utils.STIXTypeClass.SCO)),
         ((
-                stix2generator.utils.STIXTypeClass.SDO,
-                stix2generator.utils.STIXTypeClass.SCO
+                stix2.utils.STIXTypeClass.SDO,
+                stix2.utils.STIXTypeClass.SCO
         )),
     ]
 )
@@ -217,8 +64,8 @@ def test_random_generatable_stix_type(
             object_generator21, *constraints, stix_version="2.1"
         )
 
-        assert stix2generator.utils.is_stix_type(
-            type_, *constraints, stix_version="2.1"
+        assert stix2.utils.is_stix_type(
+            type_, "2.1", *constraints
         )
 
         # try to generate an object to see if there is an error
