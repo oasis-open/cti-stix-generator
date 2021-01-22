@@ -1,7 +1,7 @@
 import copy
 import pytest
 import stix2.base
-import stix2.v21
+import stix2.utils
 import stix2generator
 import stix2generator.test.utils
 import stix2generator.utils
@@ -20,9 +20,9 @@ _TLP_MARKING_DEFINITION_IDS = {
 @pytest.mark.parametrize(
     "seed_type", [
         "identity",
-        stix2generator.utils.STIXTypeClass.SDO,
-        stix2generator.utils.STIXTypeClass.SCO,
-        stix2generator.utils.STIXTypeClass.SRO
+        stix2.utils.STIXTypeClass.SDO,
+        stix2.utils.STIXTypeClass.SCO,
+        stix2.utils.STIXTypeClass.SRO
     ]
 )
 def test_seeds(num_trials, seed_type):
@@ -40,8 +40,8 @@ def test_seeds(num_trials, seed_type):
 
         # Ensure the graph has at least one object of type seed_type.
         assert any(
-            stix2generator.utils.is_stix_type(
-                obj, seed_type, stix_version="2.1"
+            stix2.utils.is_stix_type(
+                obj, "2.1", seed_type
             )
             for obj in graph.values()
         )

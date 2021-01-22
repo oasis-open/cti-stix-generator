@@ -6,6 +6,7 @@ import uuid
 
 import pytz
 
+import stix2.utils
 import stix2generator.exceptions
 import stix2generator.generation.pattern_generator
 import stix2generator.generation.reference_graph_generator

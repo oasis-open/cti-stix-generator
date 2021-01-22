@@ -380,8 +380,8 @@ class GeneratableSTIXTypeNotFoundError(GenerationError):
 
         :param constraints: The constraints which failed to match any
             specification.  Must be a list of constraint values.  See
-            stix2generator.utils.random_generatable_stix_type() or
-            .is_stix_type() for more information.
+            stix2generator.utils.random_generatable_stix_type() for more
+            information.
         :param stix_version: The STIX version which the constraints were
             checked relative to
         """
