@@ -9,8 +9,8 @@ This is an `OASIS TC Open Repository
 
 The STIX generator is a tool for generating random STIX content for prototyping
 and testing. It uses a simple, sentence-like syntax for expressing what STIX
-content to generate. This tool is provided in two forms: as a Jupyter notebook
-and as a commandline tool.
+content to generate. This tool is provided in three forms: as a Jupyter notebook,
+as a commandline tool, and a Python library.
 
 For more information, see `the documentation <https://stix2-generator.readthedocs.io/>`__ on ReadTheDocs.
 
@@ -37,8 +37,10 @@ To use the notebook locally, install the generator's dependencies including the 
 
    If you are using the JupyterLab interface, the STIX generator notebook extension can only be used in classic mode.
 
-Commandline Tool
+Usage
 ----------------
+Commandline Tool
+~~~~~~~~~~~~~~~~
 
 The commandline version of the tool reads prototyping language from a file, and
 prints the generated objects to stdout.  If a bundle is selected, the bundle is
@@ -78,6 +80,35 @@ printed instead.
       -c CONFIG, --config CONFIG
                             Config file with options to customize how content
                             is generated.
+
+Python Library
+~~~~~~~~~~~~~~
+
+You can also generate STIX objects in a Python script.
+
+You can create single objects of a specified typwusing the generate function of
+an object generator:
+
+.. code-block:: python
+
+    object_generator = stix2generator.create_object_generator()
+    indicator = object_generator.generate("indicator")
+
+You can also use the language_processor object in a similar fashion as the
+command-line tool:
+
+.. code-block:: python
+
+    language_processor = stix2generator.create_default_language_processor()
+    indicator = language_processor.build_graph("Indicator.")
+
+A given configuration file can produce more specific results, if necessary:
+
+.. code-block:: python
+
+    config = stix2generator.generation.Config(optional_property_probability=.25, minimize_ref_properties=False)
+    object_generator = stix2generator.create_object_generator(stix_generator_config=config)
+    indicator = object_generator.generate("indicator")
 
 Caveats
 -------
