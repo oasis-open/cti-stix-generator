@@ -134,6 +134,7 @@ You can create single objects of a specified type using the generate function of
 an object generator:
 
 .. code-block:: python
+
     import stix2generator
 
     object_generator = stix2generator.create_object_generator()
