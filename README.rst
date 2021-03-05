@@ -42,7 +42,7 @@ Usage
 Commandline Tool
 ~~~~~~~~~~~~~~~~
 
-The commandline version of the tool reads prototyping language from a file, and
+The buid_stix commandline tool reads prototyping language from a file, and
 prints the generated objects to stdout.  If a bundle is selected, the bundle is
 printed instead.
 
@@ -80,34 +80,80 @@ printed instead.
       -c CONFIG, --config CONFIG
                             Config file with options to customize how content
                             is generated.
+                            
+The generate_stix tool is used for more general object generation, which does
+not require a language file to be specified:
+
+::
+
+    usage: generate_stix.py [-h] [--min-rels MIN_RELS] [--max-rels MAX_RELS]
+                        [--p-reuse P_REUSE] [--p-sighting P_SIGHTING]
+                        [--dangling-refs] [--ref-max-depth REF_MAX_DEPTH] [-v]
+                        [--stix-version {2.0,2.1}] [-b]
+
+    Generation random STIX content
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      --min-rels MIN_RELS   Minimum number of SROs to create. Default=1
+      --max-rels MAX_RELS   Maximum number or SROs to create. Default=5
+      --p-reuse P_REUSE     Probability of object reuse, when creating new 
+                        connections among objects. Must be a real number in
+                        [0, 1]. Lower values result in a graph with more nodes
+                        and less interconnection. Higher values result in a
+                        graph with fewer nodes and more interconnection.
+                        Default=0.5
+  --p-sighting P_SIGHTING
+                        Probability that when an SRO is added, it is a
+                        sighting. Must be a real number in [0, 1]. Default=0.1
+  --dangling-refs       Leave reference properties "dangling". Don't force
+                        them to refer to existing objects. Applies to all
+                        reference properties *except* the endpoints of SROs.
+  --ref-max-depth REF_MAX_DEPTH
+                        If creating a new object to avoid a dangling reference,
+                        the new object could itself have reference properties;
+                        new objects created to satisfy those could themselves
+                        have reference properties, etc. This setting limits how
+                        far we grow this "reference graph". Enforcement of this
+                        limit is best-effort; reference properties required by
+                        the specification may cause further growth. Only
+                        applicable if --dangling-refs is not given. Must be a
+                        non-negative integer. Default=0
+  -v, --verbose         Enable verbose diagnostic output. Repeat for increased
+                        verbosity.
+  --stix-version {2.0,2.1}
+                        STIX version to use. Default=2.1
+  -b, --bundle          Create a bundle
 
 Python Library
 ~~~~~~~~~~~~~~
 
-You can also generate STIX objects in a Python script.
+You can also generate STIX objects programmatically in a Python script.
 
-You can create single objects of a specified typwusing the generate function of
+You can create single objects of a specified type using the generate function of
 an object generator:
 
 .. code-block:: python
+    import stix2generator
 
     object_generator = stix2generator.create_object_generator()
     indicator = object_generator.generate("indicator")
 
 You can also use the language_processor object in a similar fashion as the
-command-line tool:
+command-line tool. This will produce a list objects with the quantity
+specified in the language:
 
 .. code-block:: python
 
     language_processor = stix2generator.create_default_language_processor()
     indicator = language_processor.build_graph("Indicator.")
 
-A given configuration file can produce more specific results, if necessary:
+A given configuration object can produce more specific results, if necessary:
 
 .. code-block:: python
 
-    config = stix2generator.generation.Config(optional_property_probability=.25, minimize_ref_properties=False)
-    object_generator = stix2generator.create_object_generator(stix_generator_config=config)
+    config = stix2generator.generation.object_generator_Config(optional_property_probability=.25, minimize_ref_properties=False)
+    object_generator = stix2generator.create_object_generator(object_generator_config=config)
     indicator = object_generator.generate("indicator")
 
 Caveats
