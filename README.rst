@@ -128,7 +128,20 @@ not require a language file to be specified:
 Python Library
 ~~~~~~~~~~~~~~
 
-You can also generate STIX objects programmatically in a Python script.
+You can also generate STIX objects programmatically in a Python script. This can
+be useful when the generated objects are needed programmatically in Python code.
+
+The fastest and easiest way to create random STIX objects is with the
+create_stix_object function:
+
+.. code-block:: python
+
+    import stix2generator
+
+    generated = stix2generator.create_stix_object()
+
+This creates a dictionary of objects related to each other, easy to submit to a
+taxii server or sent through the stix validator.
 
 You can create single objects of a specified type using the generate function of
 an object generator:
@@ -140,15 +153,6 @@ an object generator:
     object_generator = stix2generator.create_object_generator()
     indicator = object_generator.generate("indicator")
 
-You can also use the language_processor object in a similar fashion as the
-command-line tool. This will produce a list objects with the quantity
-specified in the language:
-
-.. code-block:: python
-
-    language_processor = stix2generator.create_default_language_processor()
-    indicator = language_processor.build_graph("Indicator.")
-
 A given configuration object can produce more specific results, if necessary:
 
 .. code-block:: python
@@ -156,6 +160,16 @@ A given configuration object can produce more specific results, if necessary:
     config = stix2generator.generation.object_generator_Config(optional_property_probability=.25, minimize_ref_properties=False)
     object_generator = stix2generator.create_object_generator(object_generator_config=config)
     indicator = object_generator.generate("indicator")
+
+You can also use the language_processor object in a similar fashion as the
+command-line tool. This will produce a list objects based around the text you
+give to the build_graph function. In the case below, a piece of malware and two
+identities are created with a relationship object linking them together:
+
+.. code-block:: python
+
+    language_processor = stix2generator.create_default_language_processor()
+    objects = language_processor.build_graph("Malware targets Identity.")
 
 Caveats
 -------
