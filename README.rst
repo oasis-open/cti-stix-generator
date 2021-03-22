@@ -138,7 +138,8 @@ create_stix_object function:
 
     import stix2generator
 
-    generated = stix2generator.create_stix_object()
+    generator = stix2generator.create_stix_generator()
+    genrated = generator.generate()
 
 This creates a dictionary of objects related to each other, easy to submit to a
 taxii server or sent through the stix validator.
@@ -151,15 +152,15 @@ an object generator:
     import stix2generator
 
     object_generator = stix2generator.create_object_generator()
-    indicator = object_generator.generate("indicator")
+    objects = object_generator.generate("indicator")
 
 A given configuration object can produce more specific results, if necessary:
 
 .. code-block:: python
 
-    config = stix2generator.generation.object_generator_Config(optional_property_probability=.25, minimize_ref_properties=False)
+    config = stix2generator.generation.object_generator.Config(optional_property_probability=.25, minimize_ref_properties=False)
     object_generator = stix2generator.create_object_generator(object_generator_config=config)
-    indicator = object_generator.generate("indicator")
+    objects = object_generator.generate("indicator")
 
 You can also use the language_processor object in a similar fashion as the
 command-line tool. This will produce a list objects based around the text you
