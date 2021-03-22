@@ -42,7 +42,7 @@ Usage
 Commandline Tool
 ~~~~~~~~~~~~~~~~
 
-The buid_stix commandline tool reads prototyping language from a file, and
+The build_stix commandline tool reads prototyping language from a file, and
 prints the generated objects to stdout.  If a bundle is selected, the bundle is
 printed instead.
 
@@ -129,30 +129,27 @@ Python Library
 ~~~~~~~~~~~~~~
 
 You can also generate STIX objects programmatically in a Python script. This can
-be useful when the generated objects are needed programmatically in Python code.
+be useful when the generated objects are used in Python code.
 
 The fastest and easiest way to create random STIX objects is with the
-create_stix_object function:
+create_stix_generator object:
 
 .. code-block:: python
 
     import stix2generator
 
     generator = stix2generator.create_stix_generator()
-    genrated = generator.generate()
+    generated = generator.generate()
 
 This creates a dictionary of objects related to each other, easy to submit to a
 taxii server or sent through the stix validator.
 
-You can create single objects of a specified type using the generate function of
-an object generator:
+You can create single objects of a specified type using create_object_generator:
 
 .. code-block:: python
 
-    import stix2generator
-
     object_generator = stix2generator.create_object_generator()
-    objects = object_generator.generate("indicator")
+    object = object_generator.generate("indicator")
 
 A given configuration object can produce more specific results, if necessary:
 
@@ -160,12 +157,12 @@ A given configuration object can produce more specific results, if necessary:
 
     config = stix2generator.generation.object_generator.Config(optional_property_probability=.25, minimize_ref_properties=False)
     object_generator = stix2generator.create_object_generator(object_generator_config=config)
-    objects = object_generator.generate("indicator")
+    object = object_generator.generate("indicator")
 
 You can also use the language_processor object in a similar fashion as the
-command-line tool. This will produce a list objects based around the text you
-give to the build_graph function. In the case below, a piece of malware and two
-identities are created with a relationship object linking them together:
+build_stix command-line tool. This will produce a list objects based around the
+text you give to the build_graph function. In the case below, a malware and an
+identity object are created with a relationship object linking them together:
 
 .. code-block:: python
 
