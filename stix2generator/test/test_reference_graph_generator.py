@@ -1,6 +1,7 @@
 import copy
 import pytest
 import stix2.base
+import stix2.v21
 import stix2generator
 import stix2generator.test.utils
 import stix2generator.utils
@@ -879,26 +880,64 @@ def test_stix2_parsing():
     ref_graph_gen = stix2generator.generation.reference_graph_generator \
         .ReferenceGraphGenerator(obj_gen, stix_version="2.1")
 
+    identity = {
+        "id": "identity--74fa9f1b-897e-40dc-8f1c-d2f531c956bb",
+        "type": "identity",
+        "spec_version": "2.1"
+        # Omit the required "name" property.
+        # Should be ok since the property is not used by any generators,
+        # and we don't expect this dict to be parsed and produce any
+        # validation errors.
+    }
+
     graph1 = {
-        "identity--74fa9f1b-897e-40dc-8f1c-d2f531c956bb": {
-            "id": "identity--74fa9f1b-897e-40dc-8f1c-d2f531c956bb",
-            "type": "identity",
-            "spec_version": "2.1"
-            # Omit the required "name" property.
-            # Should be ok since the property is not used by any generators,
-            # and we don't expect this dict to be parsed and produce any
-            # validation errors.
-        }
+        identity["id"]: identity
     }
 
     _, graph2 = ref_graph_gen.generate(preexisting_objects=graph1)
 
     # ensure graph2 absorbed graph1
-    assert all(
-        id_ in graph2 for id_ in graph1
+    assert graph1.keys() <= graph2.keys()
+
+    # ensure our preexisting identity is still a dict, but other objects were
+    # parsed.
+    for id_, obj in graph2.items():
+        if id_ == identity["id"]:
+            assert isinstance(obj, dict)
+        else:
+            assert isinstance(obj, stix2.base._STIXBase)
+
+
+def test_not_parsing():
+    obj_gen_config = stix2generator.generation.object_generator.Config(
+        minimize_ref_properties=False
+    )
+    obj_gen = stix2generator.create_object_generator(obj_gen_config)
+
+    ref_graph_config = stix2generator.generation.reference_graph_generator \
+        .Config(
+        parse=False
+    )
+    ref_graph_gen = stix2generator.generation.reference_graph_generator \
+        .ReferenceGraphGenerator(obj_gen, ref_graph_config, stix_version="2.1")
+
+    identity = stix2.v21.Identity(
+        name="Alice"
     )
 
-    # ensure our preexisting identity is still a dict
-    assert isinstance(
-        graph2["identity--74fa9f1b-897e-40dc-8f1c-d2f531c956bb"], dict
-    )
+    graph1 = {
+        identity.id: identity
+    }
+
+    _, graph2 = ref_graph_gen.generate(preexisting_objects=graph1)
+
+    # ensure graph2 absorbed graph1
+    assert graph1.keys() <= graph2.keys()
+
+    # Ensure the only parsed object is our original identity.
+    for id_, obj in graph2.items():
+        if id_ == identity.id:
+            assert isinstance(obj, stix2.v21.Identity)
+
+        else:
+            assert isinstance(obj, dict)
