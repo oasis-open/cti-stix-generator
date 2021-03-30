@@ -863,7 +863,7 @@ def test_graph_delete_inverse_properties(num_trials):
 # anything goes.
 
 
-def test_preexisting_objects():
+def test_preexisting_objects(num_trials):
     obj_gen_config = stix2generator.generation.object_generator.Config(
         minimize_ref_properties=False
     )
@@ -872,21 +872,22 @@ def test_preexisting_objects():
     ref_graph_gen = stix2generator.generation.reference_graph_generator \
         .ReferenceGraphGenerator(obj_gen, stix_version="2.1")
 
-    _, graph1 = ref_graph_gen.generate()
+    for _ in range(num_trials):
+        _, graph1 = ref_graph_gen.generate()
 
-    _, graph2 = ref_graph_gen.generate(preexisting_objects=graph1)
+        _, graph2 = ref_graph_gen.generate(preexisting_objects=graph1)
 
-    # just ensure graph2 absorbed graph1.  Anything else we can test?
-    assert all(id_ in graph2 for id_ in graph1)
+        # just ensure graph2 absorbed graph1.  Anything else we can test?
+        assert all(id_ in graph2 for id_ in graph1)
 
-    # ensure all objects got parsed ok
-    assert all(
-        isinstance(obj, stix2.base._STIXBase)
-        for obj in graph2.values()
-    )
+        # ensure all objects got parsed ok
+        assert all(
+            isinstance(obj, stix2.base._STIXBase)
+            for obj in graph2.values()
+        )
 
 
-def test_stix2_parsing():
+def test_stix2_parsing(num_trials):
     obj_gen_config = stix2generator.generation.object_generator.Config(
         minimize_ref_properties=False
     )
@@ -905,25 +906,26 @@ def test_stix2_parsing():
         # validation errors.
     }
 
-    graph1 = {
-        identity["id"]: identity
-    }
+    for _ in range(num_trials):
+        graph1 = {
+            identity["id"]: identity
+        }
 
-    _, graph2 = ref_graph_gen.generate(preexisting_objects=graph1)
+        _, graph2 = ref_graph_gen.generate(preexisting_objects=graph1)
 
-    # ensure graph2 absorbed graph1
-    assert graph1.keys() <= graph2.keys()
+        # ensure graph2 absorbed graph1
+        assert graph1.keys() <= graph2.keys()
 
-    # ensure our preexisting identity is still a dict, but other objects were
-    # parsed.
-    for id_, obj in graph2.items():
-        if id_ == identity["id"]:
-            assert isinstance(obj, dict)
-        else:
-            assert isinstance(obj, stix2.base._STIXBase)
+        # ensure our preexisting identity is still a dict, but other objects
+        # were parsed.
+        for id_, obj in graph2.items():
+            if id_ == identity["id"]:
+                assert isinstance(obj, dict)
+            else:
+                assert isinstance(obj, stix2.base._STIXBase)
 
 
-def test_not_parsing():
+def test_not_parsing(num_trials):
     obj_gen_config = stix2generator.generation.object_generator.Config(
         minimize_ref_properties=False
     )
@@ -940,19 +942,20 @@ def test_not_parsing():
         name="Alice"
     )
 
-    graph1 = {
-        identity.id: identity
-    }
+    for _ in range(num_trials):
+        graph1 = {
+            identity.id: identity
+        }
 
-    _, graph2 = ref_graph_gen.generate(preexisting_objects=graph1)
+        _, graph2 = ref_graph_gen.generate(preexisting_objects=graph1)
 
-    # ensure graph2 absorbed graph1
-    assert graph1.keys() <= graph2.keys()
+        # ensure graph2 absorbed graph1
+        assert graph1.keys() <= graph2.keys()
 
-    # Ensure the only parsed object is our original identity.
-    for id_, obj in graph2.items():
-        if id_ == identity.id:
-            assert isinstance(obj, stix2.v21.Identity)
+        # Ensure the only parsed object is our original identity.
+        for id_, obj in graph2.items():
+            if id_ == identity.id:
+                assert isinstance(obj, stix2.v21.Identity)
 
-        else:
-            assert isinstance(obj, dict)
+            else:
+                assert isinstance(obj, dict)

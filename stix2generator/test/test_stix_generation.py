@@ -424,22 +424,23 @@ def test_observed_data_observable_container(num_trials):
                 )
 
 
-def test_preexisting_objects(stix21_generator):
-    graph1 = stix21_generator.generate()
+def test_preexisting_objects(stix21_generator, num_trials):
+    for _ in range(num_trials):
+        graph1 = stix21_generator.generate()
 
-    graph2 = stix21_generator.generate(preexisting_objects=graph1)
+        graph2 = stix21_generator.generate(preexisting_objects=graph1)
 
-    # ensure graph2 absorbed graph1
-    assert graph1.keys() <= graph2.keys()
+        # ensure graph2 absorbed graph1
+        assert graph1.keys() <= graph2.keys()
 
-    # ensure all objects got parsed ok
-    assert all(
-        isinstance(obj, stix2.base._STIXBase)
-        for obj in graph2.values()
-    )
+        # ensure all objects got parsed ok
+        assert all(
+            isinstance(obj, stix2.base._STIXBase)
+            for obj in graph2.values()
+        )
 
 
-def test_stix2_parsing(stix21_generator):
+def test_stix2_parsing(stix21_generator, num_trials):
     identity = {
         "id": "identity--74fa9f1b-897e-40dc-8f1c-d2f531c956bb",
         "type": "identity",
@@ -450,22 +451,23 @@ def test_stix2_parsing(stix21_generator):
         # validation errors.
     }
 
-    graph1 = {
-        identity["id"]: identity
-    }
+    for _ in range(num_trials):
+        graph1 = {
+            identity["id"]: identity
+        }
 
-    graph2 = stix21_generator.generate(preexisting_objects=graph1)
+        graph2 = stix21_generator.generate(preexisting_objects=graph1)
 
-    # ensure graph2 absorbed graph1
-    assert graph1.keys() <= graph2.keys()
+        # ensure graph2 absorbed graph1
+        assert graph1.keys() <= graph2.keys()
 
-    # ensure our preexisting identity is still a dict, but other objects were
-    # parsed.
-    for id_, obj in graph2.items():
-        if id_ == identity["id"]:
-            assert isinstance(obj, dict)
-        else:
-            assert isinstance(obj, stix2.base._STIXBase)
+        # ensure our preexisting identity is still a dict, but other objects
+        # were parsed.
+        for id_, obj in graph2.items():
+            if id_ == identity["id"]:
+                assert isinstance(obj, dict)
+            else:
+                assert isinstance(obj, stix2.base._STIXBase)
 
 
 def test_not_stix2_parsing(num_trials):
