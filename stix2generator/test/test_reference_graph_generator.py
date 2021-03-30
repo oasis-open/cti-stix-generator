@@ -606,6 +606,21 @@ def test_delete_inverse_properties(src_obj, ref_prop, dest_obj):
     )
 
 
+def test_no_dangling_references(num_trials):
+    obj_gen_config = stix2generator.generation.object_generator.Config(
+        minimize_ref_properties=False
+    )
+    obj_gen = stix2generator.create_object_generator(obj_gen_config)
+    ref_graph_gen = stix2generator.generation.reference_graph_generator \
+        .ReferenceGraphGenerator(
+        obj_gen
+    )
+
+    for _ in range(num_trials):
+        _, graph = ref_graph_gen.generate()
+        assert not stix2generator.test.utils.has_dangling_references(graph)
+
+
 def _has_cycle(graph):
 
     # This is kinda silly, doing repeated reachability tests (a single DFS
