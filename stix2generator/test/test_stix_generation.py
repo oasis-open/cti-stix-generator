@@ -430,9 +430,7 @@ def test_preexisting_objects(stix21_generator):
     graph2 = stix21_generator.generate(preexisting_objects=graph1)
 
     # ensure graph2 absorbed graph1
-    assert all(
-        id_ in graph2 for id_ in graph1
-    )
+    assert graph1.keys() <= graph2.keys()
 
     # ensure all objects got parsed ok
     assert all(
@@ -442,26 +440,124 @@ def test_preexisting_objects(stix21_generator):
 
 
 def test_stix2_parsing(stix21_generator):
+    identity = {
+        "id": "identity--74fa9f1b-897e-40dc-8f1c-d2f531c956bb",
+        "type": "identity",
+        "spec_version": "2.1"
+        # Omit the required "name" property.
+        # Should be ok since the property is not used by any generators,
+        # and we don't expect this dict to be parsed and produce any
+        # validation errors.
+    }
+
     graph1 = {
-        "identity--74fa9f1b-897e-40dc-8f1c-d2f531c956bb": {
-            "id": "identity--74fa9f1b-897e-40dc-8f1c-d2f531c956bb",
-            "type": "identity",
-            "spec_version": "2.1"
-            # Omit the required "name" property.
-            # Should be ok since the property is not used by any generators,
-            # and we don't expect this dict to be parsed and produce any
-            # validation errors.
-        }
+        identity["id"]: identity
     }
 
     graph2 = stix21_generator.generate(preexisting_objects=graph1)
 
     # ensure graph2 absorbed graph1
-    assert all(
-        id_ in graph2 for id_ in graph1
+    assert graph1.keys() <= graph2.keys()
+
+    # ensure our preexisting identity is still a dict, but other objects were
+    # parsed.
+    for id_, obj in graph2.items():
+        if id_ == identity["id"]:
+            assert isinstance(obj, dict)
+        else:
+            assert isinstance(obj, stix2.base._STIXBase)
+
+
+def test_not_stix2_parsing(num_trials):
+    stix_gen_config = stix2generator.generation.stix_generator.Config(
+        parse=False
     )
 
-    # ensure our preexisting identity is still a dict
-    assert isinstance(
-        graph2["identity--74fa9f1b-897e-40dc-8f1c-d2f531c956bb"], dict
+    ref_graph_config = stix2generator.generation.reference_graph_generator \
+        .Config(
+        parse=False
     )
+
+    stix_gen = stix2generator.create_stix_generator(
+        stix_generator_config=stix_gen_config,
+        ref_graph_generator_config=ref_graph_config,
+        stix_version="2.1"
+    )
+
+    identity = stix2.v21.Identity(
+        name="Alice"
+    )
+
+    for _ in range(num_trials):
+        graph1 = {
+            identity.id: identity
+        }
+
+        graph2 = stix_gen.generate(preexisting_objects=graph1)
+
+        # ensure graph2 absorbed graph1
+        assert graph1.keys() <= graph2.keys()
+
+        # Ensure the only parsed object is our original identity.
+        for id_, obj in graph2.items():
+            if id_ == identity.id:
+                assert isinstance(obj, stix2.v21.Identity)
+
+            else:
+                assert isinstance(obj, dict)
+
+
+def test_mixed_parse1(num_trials):
+
+    # Test mixed parse settings:
+
+    # STIXGenerator: parse=False
+    # ReferenceGraphGenerator: parse=True
+    stix_gen_config = stix2generator.generation.stix_generator.Config(
+        parse=False
+    )
+
+    ref_graph_config = stix2generator.generation.reference_graph_generator \
+        .Config(
+        parse=True
+    )
+
+    stix_gen = stix2generator.create_stix_generator(
+        stix_generator_config=stix_gen_config,
+        ref_graph_generator_config=ref_graph_config,
+        stix_version="2.1"
+    )
+
+    for _ in range(num_trials):
+        # Nothing much to check here; some objects may be parsed, some may be
+        # plain dicts.  Just make sure there are no errors?
+        stix_gen.generate()
+
+
+def test_mixed_parse2(num_trials):
+
+    # Test mixed parse settings:
+
+    # STIXGenerator: parse=True
+    # ReferenceGraphGenerator: parse=False
+    stix_gen_config = stix2generator.generation.stix_generator.Config(
+        parse=True
+    )
+
+    ref_graph_config = stix2generator.generation.reference_graph_generator \
+        .Config(
+        parse=False
+    )
+
+    stix_gen = stix2generator.create_stix_generator(
+        stix_generator_config=stix_gen_config,
+        ref_graph_generator_config=ref_graph_config,
+        stix_version="2.1"
+    )
+
+    for _ in range(num_trials):
+        graph = stix_gen.generate()
+
+        # Now we have something to test.  All objects should be parsed.
+        for obj in graph.values():
+            assert isinstance(obj, stix2.base._STIXBase)
