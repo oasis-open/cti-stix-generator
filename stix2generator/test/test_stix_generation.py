@@ -477,8 +477,8 @@ def test_not_stix2_parsing(num_trials):
 
     ref_graph_config = stix2generator.generation.reference_graph_generator \
         .Config(
-        parse=False
-    )
+            parse=False
+        )
 
     stix_gen = stix2generator.create_stix_generator(
         stix_generator_config=stix_gen_config,
@@ -521,8 +521,8 @@ def test_mixed_parse1(num_trials):
 
     ref_graph_config = stix2generator.generation.reference_graph_generator \
         .Config(
-        parse=True
-    )
+            parse=True
+        )
 
     stix_gen = stix2generator.create_stix_generator(
         stix_generator_config=stix_gen_config,
@@ -548,8 +548,8 @@ def test_mixed_parse2(num_trials):
 
     ref_graph_config = stix2generator.generation.reference_graph_generator \
         .Config(
-        parse=False
-    )
+            parse=False
+        )
 
     stix_gen = stix2generator.create_stix_generator(
         stix_generator_config=stix_gen_config,

@@ -613,8 +613,8 @@ def test_no_dangling_references(num_trials):
     obj_gen = stix2generator.create_object_generator(obj_gen_config)
     ref_graph_gen = stix2generator.generation.reference_graph_generator \
         .ReferenceGraphGenerator(
-        obj_gen
-    )
+            obj_gen
+        )
 
     for _ in range(num_trials):
         _, graph = ref_graph_gen.generate()
@@ -933,8 +933,8 @@ def test_not_parsing(num_trials):
 
     ref_graph_config = stix2generator.generation.reference_graph_generator \
         .Config(
-        parse=False
-    )
+            parse=False
+        )
     ref_graph_gen = stix2generator.generation.reference_graph_generator \
         .ReferenceGraphGenerator(obj_gen, ref_graph_config, stix_version="2.1")
 
