@@ -333,9 +333,8 @@ class STIXSemantics(SemanticsProvider):
             stix2generator.generation.reference_graph_generator\
             .ReferenceGraphGenerator(generator, config)
 
-        sco_type = stix2generator.utils.random_generatable_stix_type(
-            generator, stix2generator.utils.STIXTypeClass.SCO
+        _, container = observable_container_generator.generate(
+            stix2generator.utils.STIXTypeClass.SCO
         )
-        _, container = observable_container_generator.generate(sco_type)
 
         return container
