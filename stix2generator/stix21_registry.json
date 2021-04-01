@@ -998,9 +998,8 @@
                 "semantics": "word"
             },
             "configuration_version": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 20
+                "type": "string",
+                "semantics": "word"
             },
             "modules": {
                 "type": "array",
@@ -1009,14 +1008,12 @@
                 }
             },
             "analysis_engine_version": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 20
+                "type": "string",
+                "semantics": "word"
             },
             "analysis_definition_version": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 20
+                "type": "string",
+                "semantics": "word"
             },
             "submitted": {
                 "type": "string",
