@@ -321,6 +321,11 @@ class STIXSemantics(SemanticsProvider):
         config_kwargs.pop("type")
         config_kwargs.pop(SEMANTIC_PROPERTY_NAME)
 
+        # Force this setting.  ObjectGenerator really needs to produce the
+        # plain JSON values, not parsed stix2 objects, so this setting becomes
+        # a necessity in this context.
+        config_kwargs["parse"] = False
+
         config = stix2generator.generation.reference_graph_generator.Config(
             **config_kwargs
         )
@@ -328,9 +333,8 @@ class STIXSemantics(SemanticsProvider):
             stix2generator.generation.reference_graph_generator\
             .ReferenceGraphGenerator(generator, config)
 
-        sco_type = stix2generator.utils.random_generatable_stix_type(
-            generator, stix2generator.utils.STIXTypeClass.SCO
+        _, container = observable_container_generator.generate(
+            stix2generator.utils.STIXTypeClass.SCO
         )
-        _, container = observable_container_generator.generate(sco_type)
 
         return container
