@@ -2593,7 +2593,7 @@
             "openid",
             "radius",
             "skype",
-            "tacas",
+            "tacacs",
             "twitter",
             "unix",
             "windows-local",
