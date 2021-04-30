@@ -253,7 +253,7 @@ class STIXSemantics(SemanticsProvider):
             timestamp_dt = now_dt + random_duration
 
         # Format fractional seconds to at least millisecond precision
-        frac_seconds_str = str(timestamp_dt.microsecond)
+        frac_seconds_str = "{:06d}".format(timestamp_dt.microsecond)
         frac_seconds_str = frac_seconds_str.rstrip("0").ljust(3, "0")
         timestamp_str = "{}.{}Z".format(
             timestamp_dt.strftime("%Y-%m-%dT%H:%M:%S"),
