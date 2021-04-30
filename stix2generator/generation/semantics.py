@@ -219,9 +219,9 @@ class STIXSemantics(SemanticsProvider):
                 # choose a random timestamp within a year of the constraint
                 # timestamp...?
                 random_duration = datetime.timedelta(
-                    seconds=random.randint(
+                    microseconds=random.randrange(
                         0 if equal_allowed else 1,
-                        60 * 60 * 24 * 365 - 1
+                        10**6 * 60 * 60 * 24 * 365
                     )
                 )
 
@@ -252,7 +252,13 @@ class STIXSemantics(SemanticsProvider):
 
             timestamp_dt = now_dt + random_duration
 
-        timestamp_str = timestamp_dt.strftime(self._TIMESTAMP_FORMAT)
+        # Format fractional seconds to at least millisecond precision
+        frac_seconds_str = str(timestamp_dt.microsecond)
+        frac_seconds_str = frac_seconds_str.rstrip("0").ljust(3, "0")
+        timestamp_str = "{}.{}Z".format(
+            timestamp_dt.strftime("%Y-%m-%dT%H:%M:%S"),
+            frac_seconds_str
+        )
 
         return timestamp_str
 
