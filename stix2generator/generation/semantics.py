@@ -241,9 +241,9 @@ class STIXSemantics(SemanticsProvider):
 
             # choose random within a year...?
             random_duration = datetime.timedelta(
-                seconds=random.randint(
+                microseconds=random.randrange(
                     0,
-                    60 * 60 * 24 * 365 - 1
+                    10**6 * 60 * 60 * 24 * 365
                 )
             )
 
