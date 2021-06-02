@@ -1084,71 +1084,19 @@
         "oneOf": [
             {
                 "type": "object",
-                "properties": {
-                    "type": "marking-definition",
-                    "spec_version": "2.1",
-                    "id": "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9",
-                    "created": "2017-01-20T00:00:00.000Z",
-                    "definition_type": "tlp",
-                    "name": "TLP:WHITE",
-                    "definition": {
-                        "type": "object",
-                        "properties": {
-                            "tlp": "white"
-                        }
-                    }
-                }
+                "ref": "tlp-white"
             },
             {
                 "type": "object",
-                "properties": {
-                    "type": "marking-definition",
-                    "spec_version": "2.1",
-                    "id": "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
-                    "created": "2017-01-20T00:00:00.000Z",
-                    "definition_type": "tlp",
-                    "name": "TLP:GREEN",
-                    "definition": {
-                        "type": "object",
-                        "properties": {
-                            "tlp": "green"
-                        }
-                    }
-                }
+                "ref": "tlp-green"
             },
             {
                 "type": "object",
-                "properties": {
-                    "type": "marking-definition",
-                    "spec_version": "2.1",
-                    "id": "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82",
-                    "created": "2017-01-20T00:00:00.000Z",
-                    "definition_type": "tlp",
-                    "name": "TLP:AMBER",
-                    "definition": {
-                        "type": "object",
-                        "properties": {
-                            "tlp": "amber"
-                        }
-                    }
-                }
+                "ref": "tlp-amber"
             },
             {
                 "type": "object",
-                "properties": {
-                    "type": "marking-definition",
-                    "spec_version": "2.1",
-                    "id": "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed",
-                    "created": "2017-01-20T00:00:00.000Z",
-                    "definition_type": "tlp",
-                    "name": "TLP:RED",
-                    "definition": {
-                        "type": "object",
-                        "properties": {
-                            "tlp": "red"
-                        }
-                    }
-                }
+                "ref": "tlp-red"
             },
             {
                 "type": "object",
@@ -1197,6 +1145,74 @@
                 }
             }
         ]
+    },
+    "tlp-white": {
+        "type": "object",
+        "properties": {
+            "type": "marking-definition",
+            "spec_version": "2.1",
+            "id": "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9",
+            "created": "2017-01-20T00:00:00.000Z",
+            "definition_type": "tlp",
+            "name": "TLP:WHITE",
+            "definition": {
+                "type": "object",
+                "properties": {
+                    "tlp": "white"
+                }
+            }
+        }
+    },
+    "tlp-green": {
+        "type": "object",
+        "properties": {
+            "type": "marking-definition",
+            "spec_version": "2.1",
+            "id": "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
+            "created": "2017-01-20T00:00:00.000Z",
+            "definition_type": "tlp",
+            "name": "TLP:GREEN",
+            "definition": {
+                "type": "object",
+                "properties": {
+                    "tlp": "green"
+                }
+            }
+        }
+    },
+    "tlp-amber": {
+        "type": "object",
+        "properties": {
+            "type": "marking-definition",
+            "spec_version": "2.1",
+            "id": "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82",
+            "created": "2017-01-20T00:00:00.000Z",
+            "definition_type": "tlp",
+            "name": "TLP:AMBER",
+            "definition": {
+                "type": "object",
+                "properties": {
+                    "tlp": "amber"
+                }
+            }
+        }
+    },
+    "tlp-red": {
+        "type": "object",
+        "properties": {
+            "type": "marking-definition",
+            "spec_version": "2.1",
+            "id": "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed",
+            "created": "2017-01-20T00:00:00.000Z",
+            "definition_type": "tlp",
+            "name": "TLP:RED",
+            "definition": {
+                "type": "object",
+                "properties": {
+                    "tlp": "red"
+                }
+            }
+        }
     },
     "mutex": {
         "type": "object",
@@ -3201,5 +3217,21 @@
     "X509_Certificate": {
         "type": "object",
         "ref": "x509-certificate"
+    },
+    "TLP_White": {
+        "type": "object",
+        "ref": "tlp-white"
+    },
+    "TLP_Green": {
+        "type": "object",
+        "ref": "tlp-green"
+    },
+    "TLP_Amber": {
+        "type": "object",
+        "ref": "tlp-amber"
+    },
+    "TLP_Red": {
+        "type": "object",
+        "ref": "tlp-red"
     }
 }
