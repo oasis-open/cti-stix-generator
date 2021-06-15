@@ -306,6 +306,8 @@ class Config(stix2generator.generation.Config):
         how likely we are to choose to reuse.
     - inverse_property_constraints: how to handle inverse property constraints.
         See the InversePropertyConstraintEnforcement enum.
+    - parse: whether to produce parsed stix2 objects (True) or plain dicts
+        (False)
     """
 
     _DEFAULTS = {
@@ -313,7 +315,8 @@ class Config(stix2generator.generation.Config):
         "graph_type": GraphType.DAG,
         "probability_reuse": 0.5,
         "inverse_property_constraints":
-            InversePropertyConstraintEnforcement.ENFORCE
+            InversePropertyConstraintEnforcement.ENFORCE,
+        "parse": True
     }
 
 
@@ -693,10 +696,11 @@ class ReferenceGraphGenerator:
         else:
             by_id = {}
 
-        # Wrapping the base preexisting objects map this way allows us to
-        # easily distinguish new objects we create from old objects we were
-        # given.  At the end, we only want to parse the new objects.
-        by_id = collections.ChainMap(by_id).new_child()
+        if self.config.parse:
+            # Wrapping the base preexisting objects map this way allows us to
+            # easily distinguish new objects we create from old objects we were
+            # given.  At the end, we only want to parse the new objects.
+            by_id = collections.ChainMap(by_id).new_child()
 
         # For fast lookup of all generated objects of a particular type.  Maps
         # STIX type name to a list of object IDs of that type.
@@ -718,13 +722,15 @@ class ReferenceGraphGenerator:
 
         self.__augment_graph(seed_object, by_id, by_type, 0)
 
-        # Parse the new objects we created and incorporate them into the base
-        # graph.
-        new_objects = by_id.maps[0]
-        by_id = by_id.maps[1]
-        for new_id, new_obj_dict in new_objects.items():
-            by_id[new_id] = stix2.parse(
-                new_obj_dict, version=self.__stix_version, allow_custom=True
-            )
+        if self.config.parse:
+            # Parse the new objects we created and incorporate them into the
+            # base graph.
+            new_objects = by_id.maps[0]
+            by_id = by_id.maps[1]
+            for new_id, new_obj_dict in new_objects.items():
+                by_id[new_id] = stix2.parse(
+                    new_obj_dict, version=self.__stix_version,
+                    allow_custom=True
+                )
 
         return seed_id, by_id

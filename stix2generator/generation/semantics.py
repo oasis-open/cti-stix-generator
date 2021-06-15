@@ -220,9 +220,9 @@ class STIXSemantics(SemanticsProvider):
                 # choose a random timestamp within a year of the constraint
                 # timestamp...?
                 random_duration = datetime.timedelta(
-                    seconds=random.randint(
+                    microseconds=random.randrange(
                         0 if equal_allowed else 1,
-                        60 * 60 * 24 * 365 - 1
+                        10**6 * 60 * 60 * 24 * 365
                     )
                 )
 
@@ -242,9 +242,9 @@ class STIXSemantics(SemanticsProvider):
 
             # choose random within a year...?
             random_duration = datetime.timedelta(
-                seconds=random.randint(
+                microseconds=random.randrange(
                     0,
-                    60 * 60 * 24 * 365 - 1
+                    10**6 * 60 * 60 * 24 * 365
                 )
             )
 
@@ -253,7 +253,13 @@ class STIXSemantics(SemanticsProvider):
 
             timestamp_dt = now_dt + random_duration
 
-        timestamp_str = timestamp_dt.strftime(self._TIMESTAMP_FORMAT)
+        # Format fractional seconds to at least millisecond precision
+        frac_seconds_str = "{:06d}".format(timestamp_dt.microsecond)
+        frac_seconds_str = frac_seconds_str.rstrip("0").ljust(3, "0")
+        timestamp_str = "{}.{}Z".format(
+            timestamp_dt.strftime("%Y-%m-%dT%H:%M:%S"),
+            frac_seconds_str
+        )
 
         return timestamp_str
 
@@ -322,6 +328,11 @@ class STIXSemantics(SemanticsProvider):
         config_kwargs.pop("type")
         config_kwargs.pop(SEMANTIC_PROPERTY_NAME)
 
+        # Force this setting.  ObjectGenerator really needs to produce the
+        # plain JSON values, not parsed stix2 objects, so this setting becomes
+        # a necessity in this context.
+        config_kwargs["parse"] = False
+
         config = stix2generator.generation.reference_graph_generator.Config(
             **config_kwargs
         )
@@ -329,9 +340,8 @@ class STIXSemantics(SemanticsProvider):
             stix2generator.generation.reference_graph_generator\
             .ReferenceGraphGenerator(generator, config)
 
-        sco_type = stix2generator.utils.random_generatable_stix_type(
-            generator, stix2.utils.STIXTypeClass.SCO
+        _, container = observable_container_generator.generate(
+            stix2.utils.STIXTypeClass.SCO
         )
-        _, container = observable_container_generator.generate(sco_type)
 
         return container

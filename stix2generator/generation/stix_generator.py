@@ -31,13 +31,21 @@ class Config(stix2generator.generation.Config):
     complete_ref_properties: When an object is created, whether or not to
         leave its reference properties dangling.  Applies only to
         non-SRO-endpoint reference properties.
+
+    parse: whether to produce parsed stix2 objects (True) or plain dicts
+        (False).  Note that ReferenceGraphGenerator has a separate analogous
+        setting.  If this is false, that should probably be false too, to avoid
+        getting a mix of parsed and unparsed objects.  If this is true and that
+        is false, unparsed objects from that generator will nevertheless be
+        parsed by this generator.
     """
     _DEFAULTS = {
         "min_relationships": 3,
         "max_relationships": 6,
         "probability_reuse": 0.5,
         "probability_sighting": 0.2,
-        "complete_ref_properties": True
+        "complete_ref_properties": True,
+        "parse": True
     }
 
 
@@ -633,18 +641,18 @@ class STIXGenerator:
         else:
             by_id = {}
 
-        # Wrapping the base preexisting objects map this way allows us to
-        # easily distinguish new objects we create from old objects we were
-        # given.  At the end, we only want to parse the new objects.
-        by_id = collections.ChainMap(by_id).new_child()
+        if self.config.parse:
+            # Wrapping the base preexisting objects map this way allows us to
+            # easily distinguish new objects we create from old objects we were
+            # given.  At the end, we only want to parse the new objects.
+            by_id = collections.ChainMap(by_id).new_child()
 
         # by_type maps from a STIX type to a list of object IDs in the graph of
         # that type.
         by_type = {}
 
         for id_, obj in by_id.items():
-            obj_type = stix2.utils.get_type_from_id(id_)
-            by_type.setdefault(obj_type, []).append(id_)
+            by_type.setdefault(obj["type"], []).append(id_)
 
         seed_obj = self.__object_generator.generate(seed_type)
         seed_id = seed_obj["id"]
@@ -686,13 +694,22 @@ class STIXGenerator:
                     else:
                         self.__add_sro_new(by_id, by_type)
 
-        # Parse the new objects we created and incorporate them into the base
-        # graph.
-        new_objects = by_id.maps[0]
-        by_id = by_id.maps[1]
-        for new_id, new_obj_dict in new_objects.items():
-            by_id[new_id] = stix2.parse(
-                new_obj_dict, version=self.__stix_version, allow_custom=True
-            )
+        if self.config.parse:
+            # Parse the new objects we created and incorporate them into the
+            # base graph.
+            new_objects = by_id.maps[0]
+            by_id = by_id.maps[1]
+            for new_id, new_object in new_objects.items():
+                # It's possible our reference graph generator was configured
+                # to produce parsed objects; lets not parse those a second
+                # time!
+                if isinstance(new_object, dict):
+                    by_id[new_id] = stix2.parse(
+                        new_object, version=self.__stix_version,
+                        allow_custom=True
+                    )
+
+                else:
+                    by_id[new_id] = new_object
 
         return by_id

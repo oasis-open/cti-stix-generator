@@ -10,7 +10,7 @@ import stix2generator.generation.object_generator
 import stix2generator.generation.semantics
 
 
-_TIMESTAMP_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
+_TIMESTAMP_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 
 
 class DummySemantics(stix2generator.generation.semantics.SemanticsProvider):
@@ -126,7 +126,7 @@ def test_stix_semantics_timestamp_constraint(
     Test value constraint satisfaction in the stix-timestamp semantics
     implementation.
     """
-    constraint_ts_str = "2017-10-28T21:12:08Z"
+    constraint_ts_str = "2017-10-28T21:12:08.0Z"
     constraint_ts_dt = datetime.datetime.strptime(
         constraint_ts_str, _TIMESTAMP_FORMAT
     )
