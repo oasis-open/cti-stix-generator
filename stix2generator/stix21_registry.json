@@ -7,6 +7,13 @@
             "url",
             "hashes"
         ],
+        "presence-coconstraints": {
+            "dependencies": {
+                "decryption_key": [
+                    "encryption_algorithm"
+                ]
+            }
+        },
         "properties": {
             "type": "artifact",
             "id": {
