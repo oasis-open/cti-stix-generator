@@ -580,6 +580,31 @@
             }
         }
     },
+    "incident": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "id",
+            "type",
+            "name"
+        ],
+        "properties": {
+            "type": "incident",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "incident"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
+            }
+        }
+    },
     "indicator": {
         "type": "object",
         "import": "common-properties",
@@ -2335,6 +2360,11 @@
             {
                 "type": "string",
                 "semantics": "stix-id",
+                "stix-type": "incident"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
                 "stix-type": "indicator"
             },
             {
@@ -3149,6 +3179,10 @@
     "Identity": {
         "type": "object",
         "ref": "identity"
+    },
+    "Incident": {
+        "type": "object",
+        "ref": "incident"
     },
     "Indicator": {
         "type": "object",
