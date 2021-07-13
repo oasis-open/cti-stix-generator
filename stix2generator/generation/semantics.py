@@ -341,7 +341,7 @@ class STIXSemantics(SemanticsProvider):
             .ReferenceGraphGenerator(generator, config)
 
         _, container = observable_container_generator.generate(
-            stix2generator.utils.STIXTypeClass.SCO
+            stix2.utils.STIXTypeClass.SCO
         )
 
         return container
