@@ -4,11 +4,6 @@ import lark
 import stix2.registry
 import stix2.utils
 
-try:
-    import stix2.parsing as mappings
-except ImportError:
-    import stix2.core as mappings
-
 
 def is_tree(node, rule_name=None):
     """
