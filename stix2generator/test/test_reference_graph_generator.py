@@ -4,7 +4,6 @@ import stix2.base
 import stix2.utils
 import stix2generator
 import stix2generator.test.utils
-import stix2generator.utils
 import stix2generator.generation.object_generator
 import stix2generator.generation.reference_graph_generator
 
