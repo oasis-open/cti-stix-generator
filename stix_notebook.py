@@ -60,7 +60,7 @@ def stix(line, cell):
     viz_config_json = json.dumps(viz_config)
 
     output = ''
-    output += ',\n'.join(map(str, stix_objs))
+    output += ',\n'.join(obj.serialize(pretty=True) for obj in stix_objs)
     if output[0] == '{':
         if len(stix_objs) > 1:
             output = '[' + output + ']'
