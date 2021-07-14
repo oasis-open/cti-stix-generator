@@ -7,6 +7,13 @@
             "url",
             "hashes"
         ],
+        "presence-coconstraints": {
+            "dependencies": {
+                "decryption_key": [
+                    "encryption_algorithm"
+                ]
+            }
+        },
         "properties": {
             "type": "artifact",
             "id": {
@@ -193,7 +200,32 @@
             },
             "path_enc": {
                 "type": "string",
-                "semantics": "word"
+                "oneOf": [
+                    "US-ASCII",
+                    "ISO-8859-1",
+                    "ISO-8859-2",
+                    "ISO-8859-3",
+                    "ISO-8859-4",
+                    "ISO-8859-5",
+                    "ISO-8859-6",
+                    "ISO-8859-7",
+                    "ISO-8859-8",
+                    "ISO-8859-9",
+                    "ISO-8859-10",
+                    "Shift_JIS",
+                    "EUC-JP",
+                    "ISO-2022-KR",
+                    "EUC-KR",
+                    "ISO-2022-JP",
+                    "ISO-2022-JP-2",
+                    "ISO-8859-6-E",
+                    "ISO-8859-6-I",
+                    "ISO-8859-8-E",
+                    "ISO-8859-8-I",
+                    "GB2312",
+                    "Big5",
+                    "KOI8-R"
+                ]
             },
             "ctime": {
                 "type": "string",
@@ -545,6 +577,31 @@
             "contact_information": {
                 "type": "string",
                 "semantics": "address"
+            }
+        }
+    },
+    "incident": {
+        "type": "object",
+        "import": "common-properties",
+        "required": [
+            "id",
+            "type",
+            "name"
+        ],
+        "properties": {
+            "type": "incident",
+            "id": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "incident"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "description": {
+                "type": "string",
+                "semantics": "sentence"
             }
         }
     },
@@ -2303,6 +2360,11 @@
             {
                 "type": "string",
                 "semantics": "stix-id",
+                "stix-type": "incident"
+            },
+            {
+                "type": "string",
+                "semantics": "stix-id",
                 "stix-type": "indicator"
             },
             {
@@ -2765,12 +2827,16 @@
             "anonymization",
             "botnet",
             "command-and-control",
+            "control-system",
             "exfiltration",
+            "firewall",
             "hosting-malware",
             "hosting-target-lists",
             "phishing",
             "reconnaissance",
+            "routers-switches",
             "staging",
+            "workstation",
             "unknown"
         ]
     },
@@ -3117,6 +3183,10 @@
     "Identity": {
         "type": "object",
         "ref": "identity"
+    },
+    "Incident": {
+        "type": "object",
+        "ref": "incident"
     },
     "Indicator": {
         "type": "object",
