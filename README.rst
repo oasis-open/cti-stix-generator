@@ -206,6 +206,8 @@ Current Maintainers of this TC Open Repository
 
 -  `Andy Chisholm <mailto:chisholm@mitre.org>`__; GitHub ID: `chisholm <https://github.com/chisholm/>`__; WWW: `MITRE Corporation <http://www.mitre.org/>`__
 
+-  `Rich Piazza <mailto:rpiazza@mitre.org>`__; GitHub ID: `rpiazza <https://github.com/rpiazza/>`__; WWW: `MITRE Corporation <http://www.mitre.org/>`__
+
 About OASIS TC Open Repositories
 --------------------------------
 
