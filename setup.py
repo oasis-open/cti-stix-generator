@@ -37,7 +37,7 @@ setup(
         'Faker',
         'lark-parser',
         'pytz',
-        'stix2'
+        'stix2 >= 3.0.0'
     ],
 
     extras_require={

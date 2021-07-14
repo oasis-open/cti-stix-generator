@@ -1,6 +1,7 @@
 import itertools
 import pytest
 import stix2.base
+import stix2.utils
 
 import stix2generator
 import stix2generator.exceptions
@@ -13,9 +14,9 @@ import stix2generator.generation.stix_generator
 @pytest.mark.parametrize(
     "seed_type", [
         "identity",
-        stix2generator.utils.STIXTypeClass.SDO,
-        stix2generator.utils.STIXTypeClass.SCO,
-        stix2generator.utils.STIXTypeClass.SRO
+        stix2.utils.STIXTypeClass.SDO,
+        stix2.utils.STIXTypeClass.SCO,
+        stix2.utils.STIXTypeClass.SRO
     ]
 )
 def test_seeds(num_trials, seed_type, stix21_generator):
@@ -24,8 +25,8 @@ def test_seeds(num_trials, seed_type, stix21_generator):
 
         # Ensure the graph has at least one object of type seed_type.
         assert any(
-            stix2generator.utils.is_stix_type(
-                obj, seed_type, stix_version="2.1"
+            stix2.utils.is_stix_type(
+                obj, "2.1", seed_type
             )
             for obj in graph.values()
         )
@@ -41,7 +42,7 @@ def _count_relationships(graph):
     Counts the number of relationships (plain and sighting) in the graph.
     """
     count = sum(
-        1 if stix2generator.utils.is_sro(obj) else 0
+        1 if stix2.utils.is_sro(obj, "2.1") else 0
         for obj in graph.values()
     )
 
@@ -97,7 +98,7 @@ def test_complete_ref_properties_false(num_trials):
         # object.
         for id_, obj in graph.items():
 
-            if not stix2generator.utils.is_sro(obj):
+            if not stix2.utils.is_sro(obj, "2.1"):
                 first_ref = next(
                     stix2generator.utils.find_references(obj), None
                 )
@@ -285,7 +286,7 @@ def _sro_cycle_undirected_dfs(
             # Need to add the SROs to the stack too, because we don't want to
             # reuse them in a cycle.  Cycles require distinct objects *and*
             # distinct SROs.
-            if stix2generator.utils.is_sro(obj) \
+            if stix2.utils.is_sro(obj, "2.1") \
                     and id_ not in search_stack \
                     and _sro_relates(obj, curr_id):
 
@@ -323,11 +324,11 @@ def _has_sro_cycle_undirected(graph):
     """
     # Need to find a start node, i.e. a SRO-connectable object in the graph.
     sro_connectable_ids = (
-        id_ for id_, obj in graph.items() if stix2generator.utils.is_stix_type(
+        id_ for id_, obj in graph.items() if stix2.utils.is_stix_type(
             obj,
-            stix2generator.utils.STIXTypeClass.SDO,
-            stix2generator.utils.STIXTypeClass.SCO,
-            stix_version="2.1"
+            "2.1",
+            stix2.utils.STIXTypeClass.SDO,
+            stix2.utils.STIXTypeClass.SCO,
         )
     )
 

@@ -6,6 +6,7 @@ import uuid
 
 import pytz
 
+import stix2.utils
 import stix2generator.exceptions
 import stix2generator.generation.pattern_generator
 import stix2generator.generation.reference_graph_generator
@@ -340,7 +341,7 @@ class STIXSemantics(SemanticsProvider):
             .ReferenceGraphGenerator(generator, config)
 
         _, container = observable_container_generator.generate(
-            stix2generator.utils.STIXTypeClass.SCO
+            stix2.utils.STIXTypeClass.SCO
         )
 
         return container
