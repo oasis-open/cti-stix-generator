@@ -6,8 +6,8 @@ project = 'stix2-generator'
 copyright = '2020, OASIS Open'
 author = 'OASIS Open'
 
-version = '0.1.0'
-release = '0.1.0'
+version = '0.2.0'
+release = '0.2.0'
 
 language = None
 exclude_patterns = ['_build', '_templates', 'Thumbs.db', '.DS_Store']
