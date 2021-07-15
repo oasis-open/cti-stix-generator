@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+jupyter nbextension install stix2viz --py --user
+jupyter nbextension enable stix2viz --py --user
+
