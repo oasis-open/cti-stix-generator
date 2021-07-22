@@ -372,7 +372,13 @@ class ObjectGenerator:
 
         elif "oneOf" in spec:
             # value of the "oneOf" property should be a list of specs.
-            sub_spec = random.choice(spec["oneOf"])
+
+            if isinstance(spec["oneOf"], list):
+                sub_spec = random.choice(spec["oneOf"])
+            else:
+                weights = [ int(x) for x in list(spec["oneOf"].keys())]
+                population = list(spec["oneOf"].values())
+                sub_spec = random.choices(population, weights=weights)[0]
             value = self.generate_from_spec(
                 sub_spec,
                 expected_type=type_,

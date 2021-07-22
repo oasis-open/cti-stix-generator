@@ -129,7 +129,11 @@ def _update_dict_recursive(base_dict, new_dict):
 
     for key, val in new_dict.items():
         if isinstance(val, Mapping):
-            base_dict[key] = _update_dict_recursive(base_dict.get(key, {}), val)
+            # if new val is an empty dict, that means delete key
+            if val == dict():
+                del base_dict[key]
+            else:
+                base_dict[key] = _update_dict_recursive(base_dict.get(key, {}), val)
         else:
             base_dict[key] = val
     return base_dict
