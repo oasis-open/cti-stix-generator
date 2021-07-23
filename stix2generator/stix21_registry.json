@@ -653,13 +653,16 @@
             "valid_until": {
                 "type": "string",
                 "oneOf": {
-                    "95": {
-                        "type": "string",
-                        "semantics": "stix-timestamp"
-                    },
-                    "5": "9999-01-01T00:00:00.000Z"
-                }
+                    "choices": [
+                                    {
+                                        "type": "string",
+                                        "semantics": "stix-timestamp"
 
+                                    },
+                                    "9999-01-01T00:00:00.000Z"
+                    ],
+                    "weights": [95, 5]
+                }
             },
             "kill_chain_phases": {
                 "type": "array",
@@ -2779,13 +2782,16 @@
     "indicator-type-ov": {
         "type": "string",
         "oneOf": {
-            "10": "anomalous-activity",
-            "10": "anonymization",
-            "10": "benign",
-            "10": "compromised",
-            "10": "malicious-activity",
-            "10": "attribution",
-            "40": "unknown"
+            "choices": [
+                            "anomalous-activity",
+                            "anonymization",
+                            "benign",
+                            "compromised",
+                            "malicious-activity",
+                            "attribution",
+                            "unknown"
+            ],
+            "weights": [10, 10, 10, 10, 10, 10, 40]
         }
     },
     "industry-sector-ov": {
