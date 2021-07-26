@@ -652,17 +652,7 @@
             },
             "valid_until": {
                 "type": "string",
-                "oneOf": {
-                    "choices": [
-                                    {
-                                        "type": "string",
-                                        "semantics": "stix-timestamp"
-
-                                    },
-                                    "9999-01-01T00:00:00.000Z"
-                    ],
-                    "weights": [95, 5]
-                }
+                "semantics": "stix-timestamp"
             },
             "kill_chain_phases": {
                 "type": "array",
