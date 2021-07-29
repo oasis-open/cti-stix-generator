@@ -1,14 +1,15 @@
 import itertools
+
 import pytest
 import stix2.base
 import stix2.utils
 
 import stix2generator
 import stix2generator.exceptions
-import stix2generator.test.utils
-import stix2generator.utils
 import stix2generator.generation.object_generator
 import stix2generator.generation.stix_generator
+import stix2generator.test.utils
+import stix2generator.utils
 
 
 @pytest.mark.parametrize(

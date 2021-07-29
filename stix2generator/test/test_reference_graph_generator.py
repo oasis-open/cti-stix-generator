@@ -1,12 +1,13 @@
 import copy
+
 import pytest
 import stix2.base
 import stix2.utils
+
 import stix2generator
-import stix2generator.test.utils
 import stix2generator.generation.object_generator
 import stix2generator.generation.reference_graph_generator
-
+import stix2generator.test.utils
 
 _TLP_MARKING_DEFINITION_IDS = {
     "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9",

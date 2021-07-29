@@ -7,15 +7,16 @@ import string
 import stix2generator.generation
 import stix2generator.generation.constraints
 import stix2generator.generation.semantics
-
-from stix2generator.exceptions import (
-    CyclicSpecificationReferenceError, InvalidPropertyGroupError,
-    ObjectGenerationError, PresenceCoconstraintError,
-    SemanticValueTypeMismatchError, SpecificationNotFoundError,
-    TypeMismatchError, UndefinedPropertyError, UnrecognizedJSONTypeError,
-    ValueCoconstraintError
-)
-
+from stix2generator.exceptions import (CyclicSpecificationReferenceError,
+                                       InvalidPropertyGroupError,
+                                       ObjectGenerationError,
+                                       PresenceCoconstraintError,
+                                       SemanticValueTypeMismatchError,
+                                       SpecificationNotFoundError,
+                                       TypeMismatchError,
+                                       UndefinedPropertyError,
+                                       UnrecognizedJSONTypeError,
+                                       ValueCoconstraintError)
 
 # lazy-initialized
 _log = None

@@ -1,14 +1,14 @@
 import datetime
-import faker
 import operator
-import pytest
 import uuid
+
+import faker
+import pytest
 
 import stix2generator.exceptions
 import stix2generator.generation.constraints
 import stix2generator.generation.object_generator
 import stix2generator.generation.semantics
-
 
 _TIMESTAMP_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 

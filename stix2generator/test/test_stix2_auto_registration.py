@@ -7,12 +7,11 @@ except ImportError:
     import stix2.core as mappings
 
 import stix2.exceptions
+
 import stix2generator
 import stix2generator.exceptions
-from stix2generator.stixcustom import (
-    stix2_register_custom, stix2_auto_register_all_custom
-)
-
+from stix2generator.stixcustom import (stix2_auto_register_all_custom,
+                                       stix2_register_custom)
 
 # Lazy-initialize.  Will hold a map from stix vid (e.g. "v20", "v21", etc)
 # to a set of names.  So we have a separate set of names for each STIX

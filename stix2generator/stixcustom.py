@@ -2,10 +2,10 @@ import stix2
 import stix2.base
 import stix2.custom
 import stix2.properties
+
 import stix2generator
 import stix2generator.exceptions
 import stix2generator.generation.object_generator
-
 
 _JSON_SIMPLE_TYPE_STIX_PROPERTY_MAP = {
     "string": stix2.properties.StringProperty,

@@ -3,11 +3,11 @@ import os.path
 
 import faker
 
-import stix2generator.language.builder
 import stix2generator.generation.object_generator
 import stix2generator.generation.reference_graph_generator
 import stix2generator.generation.semantics
 import stix2generator.generation.stix_generator
+import stix2generator.language.builder
 from stix2generator.exceptions import RegistryNotFoundError
 
 try:

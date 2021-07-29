@@ -3,8 +3,8 @@ import configparser
 import json
 
 import stix2generator
-import stix2generator.language.builder
 import stix2generator.generation.object_generator
+import stix2generator.language.builder
 import stix2generator.logging
 
 

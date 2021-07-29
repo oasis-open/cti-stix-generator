@@ -5,7 +5,7 @@ CHANGELOG
 0.2.0 - Released 2021-07-14
 ---------------------------
 
-* Miscellaneous registry updates   
+* Miscellaneous registry updates
 * Bring stix-generator back to compatibility with the stix2 library
 * Add new infrastructure-type-ov values , Incident object for CS03
 * Use real values for path_enc
@@ -22,10 +22,10 @@ CHANGELOG
     implementation handles type selection automatically!
 * Add a "parse" setting to STIXGenerator's config, to enable/disable
     parsing to stix2 objects, analogously to the change to
-    ReferenceGraphGenerator. 
+    ReferenceGraphGenerator.
 * Fix the observable-container semantic to switch off parsing
     in its ReferenceGraphGenerator instance, to ensure generated
-    objects are plain JSON-serializable values. 
+    objects are plain JSON-serializable values.
 
 
 0.1.0 - Released 2020-12-13

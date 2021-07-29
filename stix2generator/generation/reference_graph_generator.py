@@ -2,12 +2,13 @@ import collections
 import collections.abc
 import enum
 import random
+
 import stix2.utils
 
 import stix2generator
-import stix2generator.utils
 import stix2generator.generation
 import stix2generator.generation.object_generator
+import stix2generator.utils
 
 
 class InversePropertyConstraint:
