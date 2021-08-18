@@ -59,7 +59,7 @@ Python types is as follows:
 +--------+------------+
 |  JSON  |   Python   |
 +========+============+
-| string | str/unicode|
+| string | str        |
 +--------+------------+
 | number | float      |
 +--------+------------+
