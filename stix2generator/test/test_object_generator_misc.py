@@ -63,6 +63,16 @@ def test_one_of_invalid_weights(object_generator):
             }
         })
 
+    with pytest.raises(stix2generator.exceptions.ObjectGenerationError):
+        object_generator.generate_from_spec({
+            "type": "string",
+            "oneOf": {
+                # Must have at least one choice
+                "choices": [],
+                "weights": []
+            }
+        })
+
 
 def test_ref():
 
