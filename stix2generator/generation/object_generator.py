@@ -383,12 +383,12 @@ class ObjectGenerator:
 
                 # For pre-Python 3.9 compatibility, check this manually.
                 # (Python 3.9+ does this automatically.)
-                if all(w==0 for w in weights):
+                if all(w == 0 for w in weights):
                     raise ValueError("Weights may not all be zero")
 
                 # Docs say negative weights produce undefined behavior.  We
                 # should produce an error.
-                if any(w<0 for w in weights):
+                if any(w < 0 for w in weights):
                     raise ValueError(
                         "Weights may not be negative: " + str(weights)
                     )
