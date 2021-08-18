@@ -377,9 +377,24 @@ class ObjectGenerator:
             if isinstance(spec["oneOf"], list):
                 sub_spec = random.choice(spec["oneOf"])
             else:
+                # else, oneOf spec must be a dict.
                 weights = spec["oneOf"]["weights"]
                 population = spec["oneOf"]["choices"]
+
+                # For pre-Python 3.9 compatibility, check this manually.
+                # (Python 3.9+ does this automatically.)
+                if all(w==0 for w in weights):
+                    raise ValueError("Weights may not all be zero")
+
+                # Docs say negative weights produce undefined behavior.  We
+                # should produce an error.
+                if any(w<0 for w in weights):
+                    raise ValueError(
+                        "Weights may not be negative: " + str(weights)
+                    )
+
                 sub_spec = random.choices(population, weights=weights)[0]
+
             value = self.generate_from_spec(
                 sub_spec,
                 expected_type=type_,

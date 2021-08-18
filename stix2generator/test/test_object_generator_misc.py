@@ -15,7 +15,6 @@ def test_one_of(object_generator, num_trials):
 
 
 def test_one_of_with_weights(object_generator, num_trials):
-    generated_9999 = False
     for _ in range(num_trials):
         value = object_generator.generate_from_spec({
             "type": "string",
@@ -28,10 +27,41 @@ def test_one_of_with_weights(object_generator, num_trials):
                 "weights": [60, 40, 0]
             }
         })
-        if value == "9999-01-01T00:00:00.000Z":
-            generated_9999 = True
-        assert (value == "9999-01-01T00:00:00.000Z" or value == "2021-01-01T00:00:00.000Z") and value != "1999-01-01T00:00:00.000Z"
-    assert generated_9999
+
+        assert value in ("9999-01-01T00:00:00.000Z", "2021-01-01T00:00:00.000Z")
+
+
+def test_one_of_invalid_weights(object_generator):
+
+    with pytest.raises(stix2generator.exceptions.ObjectGenerationError):
+        object_generator.generate_from_spec({
+            "type": "string",
+            "oneOf": {
+                "choices": [1, 2, 3],
+                # negative weights not allowed
+                "weights": [-1, 2, 3]
+            }
+        })
+
+    with pytest.raises(stix2generator.exceptions.ObjectGenerationError):
+        object_generator.generate_from_spec({
+            "type": "string",
+            "oneOf": {
+                "choices": [1, 2, 3],
+                # all zero weights not allowed
+                "weights": [0, 0, 0]
+            }
+        })
+
+    with pytest.raises(stix2generator.exceptions.ObjectGenerationError):
+        object_generator.generate_from_spec({
+            "type": "string",
+            "oneOf": {
+                "choices": [1, 2, 3],
+                # Different number of weights and choices is not allowed
+                "weights": [1, 2, 3, 4, 5]
+            }
+        })
 
 
 def test_ref():
