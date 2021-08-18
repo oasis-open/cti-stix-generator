@@ -2,18 +2,19 @@ import collections.abc
 import datetime
 import logging
 import random
+
 import stix2
 import stix2.parsing
 import stix2.utils
+
 import stix2generator
-from stix2generator.exceptions import (
-    UnhandledPropertyValueType, SpecificationNotFoundError,
-    UnsupportedObjectStructureError, UnrecognizedSTIXTypeError,
-    InvalidRefPropertyValueError
-)
 import stix2generator.generation
 import stix2generator.utils
-
+from stix2generator.exceptions import (InvalidRefPropertyValueError,
+                                       SpecificationNotFoundError,
+                                       UnhandledPropertyValueType,
+                                       UnrecognizedSTIXTypeError,
+                                       UnsupportedObjectStructureError)
 
 # Don't create object paths which include the following properties.
 _OBJECT_PATH_BLACKLIST = {

@@ -1,14 +1,14 @@
+import sys
+
 import lark.exceptions
 import pytest
 import rdflib
-import sys
 
 import stix2generator
-from stix2generator.exceptions import (
-    CircularVariableDependenciesError, LanguageError, RedeclaredVariableError,
-    SpecificationNotFoundError, UndeclaredVariableError
-)
-
+from stix2generator.exceptions import (CircularVariableDependenciesError,
+                                       LanguageError, RedeclaredVariableError,
+                                       SpecificationNotFoundError,
+                                       UndeclaredVariableError)
 
 _STIX_URN_PREFIX_ID = "urn:stix:id:"
 _STIX_URN_PREFIX_TYPE = "urn:stix:type:"

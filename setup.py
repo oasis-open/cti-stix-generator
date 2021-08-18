@@ -1,14 +1,15 @@
 #!/usr/bin/env python
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 
 def get_long_description():
     with open('README.rst') as f:
         return f.read()
 
+
 setup(
     name='stix2-generator',
-    version='0.1.0',
+    version='0.2.0',
     description='Generate random STIX 2 content.',
     long_description=get_long_description(),
     long_description_content_type='text/x-rst',

@@ -1,11 +1,12 @@
 import json
+
 import pytest
 import stix2
 import stix2.exceptions
 
 import stix2generator
-import stix2generator.language.builder
 import stix2generator.generation.object_generator
+import stix2generator.language.builder
 
 
 def get_stix21_spec_names():

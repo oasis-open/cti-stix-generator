@@ -1,11 +1,13 @@
-import pytest
 import re
-import stix2generator
-from stix2generator.generation.pattern_generator import PatternGenerator, Config
-import stix2patterns.inspector
-from stix2patterns.validator import validate
-from stix2patterns.v21.pattern import Pattern
 
+import pytest
+import stix2patterns.inspector
+from stix2patterns.v21.pattern import Pattern
+from stix2patterns.validator import validate
+
+import stix2generator
+from stix2generator.generation.pattern_generator import (Config,
+                                                         PatternGenerator)
 
 _REPEATS_RE = re.compile(r"REPEATS (\d+) TIMES")
 _WITHIN_RE = re.compile(r"WITHIN (\d+) SECONDS")

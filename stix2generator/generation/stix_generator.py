@@ -2,6 +2,7 @@ import collections
 import collections.abc
 import itertools
 import random
+
 import stix2.utils
 
 import stix2generator.exceptions

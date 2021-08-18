@@ -80,7 +80,7 @@ printed instead.
       -c CONFIG, --config CONFIG
                             Config file with options to customize how content
                             is generated.
-                            
+
 The generate_stix tool is used for more general object generation, which does
 not require a language file to be specified:
 
@@ -97,7 +97,7 @@ not require a language file to be specified:
       -h, --help            show this help message and exit
       --min-rels MIN_RELS   Minimum number of SROs to create. Default=1
       --max-rels MAX_RELS   Maximum number or SROs to create. Default=5
-      --p-reuse P_REUSE     Probability of object reuse, when creating new 
+      --p-reuse P_REUSE     Probability of object reuse, when creating new
                         connections among objects. Must be a real number in
                         [0, 1]. Lower values result in a graph with more nodes
                         and less interconnection. Higher values result in a

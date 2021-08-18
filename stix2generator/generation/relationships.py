@@ -1,6 +1,5 @@
 import collections
 
-
 # Summary of defined SROs.  This basically shows how STIX types are allowed to
 # relate to each other, and via which relationship types.
 #

@@ -1,5 +1,6 @@
 import collections.abc
 import random
+
 import lark
 import stix2.registry
 import stix2.utils

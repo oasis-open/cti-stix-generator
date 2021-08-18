@@ -59,7 +59,7 @@ Python types is as follows:
 +--------+------------+
 |  JSON  |   Python   |
 +========+============+
-| string | str/unicode|
+| string | str        |
 +--------+------------+
 | number | float      |
 +--------+------------+
@@ -415,6 +415,31 @@ For example:
 
 This example illustrates how one might write a specification which picks a
 random word from a vocabulary.
+
+An alternative structure is also available which allows weighting the
+alternatives differently.  The structure is an object with ``choices`` and
+``weights`` keys.  For example:
+
+.. code:: json
+
+    {
+        "type": "string",
+        "oneOf": {
+            "choices": ["term1", "term2"],
+            "weights": [1, 2]
+        }
+    }
+
+The weights are normalized to a probability distribution.  In this example,
+"term2" will be chosen twice as often as "term1".  The general rules for this
+structure include:
+
+- ``choices`` must be a list of specifications
+- ``weights`` must be a list of numbers (need not be integers)
+- The choices and weights lists must be the same length
+- The choices and weights lists must not be empty
+- No weight may be negative
+- At least one weight must be positive
 
 Semantics
 ---------

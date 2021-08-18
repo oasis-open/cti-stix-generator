@@ -1,19 +1,16 @@
-import lark
 import logging
 import pprint
+
+import lark
 import stix2
 
-from stix2generator.exceptions import (
-    CircularVariableDependenciesError, LanguageError, RedeclaredVariableError,
-    UndeclaredVariableError
-)
-from stix2generator.utils import (
-    is_token, is_tree
-)
-import stix2generator.generation.semantics
 import stix2generator.generation.object_generator
+import stix2generator.generation.semantics
 import stix2generator.logging
-
+from stix2generator.exceptions import (CircularVariableDependenciesError,
+                                       LanguageError, RedeclaredVariableError,
+                                       UndeclaredVariableError)
+from stix2generator.utils import is_token, is_tree
 
 _grammar = r"""
 

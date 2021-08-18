@@ -1,7 +1,7 @@
 # Unit tests for the (top-level) utils module.
 import pytest
-
 import stix2.utils
+
 import stix2generator.utils
 
 

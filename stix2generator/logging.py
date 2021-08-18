@@ -1,7 +1,6 @@
 import logging
 import logging.config
 
-
 # custom more-verbose-than-debug level, for extra verbosity.
 EXTRA_VERBOSE = 5
 
