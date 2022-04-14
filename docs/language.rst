@@ -240,6 +240,9 @@ Where *used*, a variable may not have either a count or a property block.  Where
 
     malware_a targets victims.
 
+Note that the property block must go before the colon when declared on a
+variable.
+
 The count on a variable is given before the variable name, similar to how it is
 done with domain objects and relationships in normal graph statements.  This
 allows variables to hold multiple values.  The above represents a ``malware``
