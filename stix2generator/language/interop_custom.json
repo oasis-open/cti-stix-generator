@@ -1,0 +1,463 @@
+{
+    "attack-pattern": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["spec_version", "id", "created", "modified", "type", "name", "external_references", "kill_chain_phases", "created_by_ref"],
+        "properties":{
+            "type": "attack-pattern",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            },
+            "external_references":{
+                "type": "array",
+                "ref": "external-references"
+            }
+        }
+    },
+    "campaign": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "campaign",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "course of action": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "course of action",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "grouping": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["object_refs", "context", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "grouping",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "incident": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "incident",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "identity": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["identity_class", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "identity",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "indicator": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["indicator_types","pattern", "pattern_type", "valid_from", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "indicator",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "infrastructure": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["infrastructure_types","spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "infrastructure",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "intrustion set": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["resource_leve", "primary_motivations", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "intrustion set",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "Location": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["region", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "Location",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "malware": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["malware_types", "is_family", "first_seen", "last_seen", "architecture_execution_envs", "implementation_languages", "capabilities", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "malware",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version": "2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "Malware Analysis": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["product", "version", "submitted", "analysis_started", "analysis_ended", "result", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "Malware Analysis",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "note": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["content", "object_refs", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "note",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            }
+        }
+    },
+    "observed data": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["first_observed", "last_observed", "number_observed", "object_refs", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "observed data",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "opinion": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["opinion", "object_refs", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "opinion",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            }
+        }
+    },
+    "report": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["report_types","published","object_refs", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "report",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "threat actor": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["threat_actor_types", "roles", "sophistication", "resource_level", "primary_motivation", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "threat actor",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "tool": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["tool_types", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "tool",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+    },
+    "vulberability": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["type", "spec_version", "id", "created_by_ref", "created", "modified", "name", "external_references"],
+        "properties":{
+            "type": "tool",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
+
+    },
+    "sighting": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["sighting_of_ref","first_seen", "last_seen", "count", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "properties":{
+            "type": "sighting",
+            "created": {
+                "type": "string",
+                "semantics":"stix-timestamp"
+            },
+            "modified": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "spec_version":"2.1",
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            },
+            "name": {
+                "type": "string",
+                "semantics": "word"
+            },
+            "sighting_of_ref": {
+                "type": "string",
+                "ref": "sdo-identifier"
+            }
+        }
+    }
+}
