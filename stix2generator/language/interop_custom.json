@@ -344,7 +344,7 @@
     "report": {
         "type": "object",
         "import": "common-properties",
-        "required": ["report_types","published","object_refs", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["object_marking_refs","report_types","published","object_refs", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
         "properties":{
             "type": "report",
             "created": {
@@ -363,7 +363,7 @@
             }
         }
     },
-    "threat actor": {
+    "threat-actor": {
         "type": "object",
         "import": "common-properties",
         "required": ["threat_actor_types", "roles", "sophistication", "resource_level", "primary_motivation", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
@@ -407,7 +407,7 @@
             }
         }
     },
-    "vulberability": {
+    "vulnerability": {
         "type": "object",
         "import": "common-properties",
         "required": ["type", "spec_version", "id", "created_by_ref", "created", "modified", "name", "external_references"],
@@ -426,6 +426,10 @@
                 "type": "string",
                 "semantics": "stix-id",
                 "stix-type": "identity"
+            },
+            "external_references": {
+                "type": "array",
+                "ref": "external-references"
             }
         }
 
@@ -457,6 +461,19 @@
             "sighting_of_ref": {
                 "type": "string",
                 "ref": "sdo-identifier"
+            }
+        }
+    },
+    "common-properties": {
+        "properties":{
+            "object_marking_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "stix-id",
+                    "stix-type": "marking-definition"
+                },
+                "maxItems": 1
             }
         }
     }
