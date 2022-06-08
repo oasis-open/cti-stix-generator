@@ -47,7 +47,7 @@
             }
         }
     },
-    "course of action": {
+    "course-of-action": {
         "type": "object",
         "import": "common-properties",
         "required": ["spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
@@ -179,12 +179,12 @@
             }
         }
     },
-    "intrustion set": {
+    "intrusion-set": {
         "type": "object",
         "import": "common-properties",
-        "required": ["resource_leve", "primary_motivations", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["resource_level", "primary_motivations", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
         "properties":{
-            "type": "intrustion set",
+            "type": "intrusion set",
             "created": {
                 "type": "string",
                 "semantics":"stix-timestamp"
@@ -201,12 +201,12 @@
             }
         }
     },
-    "Location": {
+    "location": {
         "type": "object",
         "import": "common-properties",
         "required": ["region", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
         "properties":{
-            "type": "Location",
+            "type": "location",
             "created": {
                 "type": "string",
                 "semantics":"stix-timestamp"
@@ -245,12 +245,12 @@
             }
         }
     },
-    "Malware Analysis": {
+    "malware-analysis": {
         "type": "object",
         "import": "common-properties",
         "required": ["product", "version", "submitted", "analysis_started", "analysis_ended", "result", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
         "properties":{
-            "type": "Malware Analysis",
+            "type": "malware-analysis",
             "created": {
                 "type": "string",
                 "semantics":"stix-timestamp"
@@ -293,12 +293,12 @@
             }
         }
     },
-    "observed data": {
+    "observed-data": {
         "type": "object",
         "import": "common-properties",
         "required": ["first_observed", "last_observed", "number_observed", "object_refs", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
         "properties":{
-            "type": "observed data",
+            "type": "observed-data",
             "created": {
                 "type": "string",
                 "semantics":"stix-timestamp"
@@ -344,7 +344,7 @@
     "report": {
         "type": "object",
         "import": "common-properties",
-        "required": ["object_marking_refs","report_types","published","object_refs", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["report_types","published","object_refs", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
         "properties":{
             "type": "report",
             "created": {
@@ -368,7 +368,7 @@
         "import": "common-properties",
         "required": ["threat_actor_types", "roles", "sophistication", "resource_level", "primary_motivation", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
         "properties":{
-            "type": "threat actor",
+            "type": "threat-actor",
             "created": {
                 "type": "string",
                 "semantics":"stix-timestamp"
@@ -437,32 +437,7 @@
     "sighting": {
         "type": "object",
         "import": "common-properties",
-        "required": ["sighting_of_ref","first_seen", "last_seen", "count", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
-        "properties":{
-            "type": "sighting",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
-            "created_by_ref": {
-                "type": "string",
-                "semantics": "stix-id",
-                "stix-type": "identity"
-            },
-            "name": {
-                "type": "string",
-                "semantics": "word"
-            },
-            "sighting_of_ref": {
-                "type": "string",
-                "ref": "sdo-identifier"
-            }
-        }
+        "required": ["first_seen", "last_seen", "count", "created_by_ref"]
     },
     "common-properties": {
         "properties":{
