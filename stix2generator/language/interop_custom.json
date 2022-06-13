@@ -2,18 +2,9 @@
     "attack-pattern": {
         "type": "object",
         "import": "common-properties",
-        "required": ["spec_version", "id", "created", "modified", "type", "name", "external_references", "kill_chain_phases", "created_by_ref"],
+        "required": ["external_references", "kill_chain_phases", "created_by_ref"],
         "properties":{
             "type": "attack-pattern",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -28,18 +19,9 @@
     "campaign": {
         "type": "object",
         "import": "common-properties",
-        "required": ["spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["created_by_ref"],
         "properties":{
             "type": "campaign",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -50,18 +32,9 @@
     "course-of-action": {
         "type": "object",
         "import": "common-properties",
-        "required": ["spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["created_by_ref"],
         "properties":{
-            "type": "course of action",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
+            "type": "course-of-action",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -72,18 +45,9 @@
     "grouping": {
         "type": "object",
         "import": "common-properties",
-        "required": ["object_refs", "context", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["identities_class", "created_by_ref"],
         "properties":{
             "type": "grouping",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -94,18 +58,9 @@
     "incident": {
         "type": "object",
         "import": "common-properties",
-        "required": ["spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["created_by_ref"],
         "properties":{
             "type": "incident",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -116,18 +71,9 @@
     "identity": {
         "type": "object",
         "import": "common-properties",
-        "required": ["identity_class", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["identity_class", "created_by_ref"],
         "properties":{
             "type": "identity",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -138,18 +84,9 @@
     "indicator": {
         "type": "object",
         "import": "common-properties",
-        "required": ["indicator_types","pattern", "pattern_type", "valid_from", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["indicator_types","name", "created_by_ref"],
         "properties":{
             "type": "indicator",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -160,18 +97,9 @@
     "infrastructure": {
         "type": "object",
         "import": "common-properties",
-        "required": ["infrastructure_types","spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["infrastructure_types", "created_by_ref"],
         "properties":{
             "type": "infrastructure",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -182,18 +110,9 @@
     "intrusion-set": {
         "type": "object",
         "import": "common-properties",
-        "required": ["resource_level", "primary_motivations", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["resource_level", "primary_motivations", "created_by_ref"],
         "properties":{
             "type": "intrusion set",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -204,18 +123,9 @@
     "location": {
         "type": "object",
         "import": "common-properties",
-        "required": ["region", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["region", "created_by_ref"],
         "properties":{
             "type": "location",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -226,18 +136,9 @@
     "malware": {
         "type": "object",
         "import": "common-properties",
-        "required": ["malware_types", "is_family", "first_seen", "last_seen", "architecture_execution_envs", "implementation_languages", "capabilities", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["malware_types", "is_family", "first_seen", "last_seen", "architecture_execution_envs", "implementation_languages", "capabilities", "name", "created_by_ref"],
         "properties":{
             "type": "malware",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version": "2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -248,18 +149,9 @@
     "malware-analysis": {
         "type": "object",
         "import": "common-properties",
-        "required": ["product", "version", "submitted", "analysis_started", "analysis_ended", "result", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["version", "submitted", "analysis_started", "analysis_ended", "result", "created_by_ref"],
         "properties":{
             "type": "malware-analysis",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -270,44 +162,22 @@
     "note": {
         "type": "object",
         "import": "common-properties",
-        "required": ["content", "object_refs", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["created_by_ref"],
         "properties":{
             "type": "note",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
                 "stix-type": "identity"
-            },
-            "name": {
-                "type": "string",
-                "semantics": "word"
             }
         }
     },
     "observed-data": {
         "type": "object",
         "import": "common-properties",
-        "required": ["first_observed", "last_observed", "number_observed", "object_refs", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["object_refs", "created_by_ref"],
         "properties":{
             "type": "observed-data",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -318,7 +188,7 @@
     "opinion": {
         "type": "object",
         "import": "common-properties",
-        "required": ["opinion", "object_refs", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["created_by_ref"],
         "properties":{
             "type": "opinion",
             "created": {
@@ -344,18 +214,9 @@
     "report": {
         "type": "object",
         "import": "common-properties",
-        "required": ["report_types","published","object_refs", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["report_types", "created_by_ref"],
         "properties":{
             "type": "report",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -366,18 +227,9 @@
     "threat-actor": {
         "type": "object",
         "import": "common-properties",
-        "required": ["threat_actor_types", "roles", "sophistication", "resource_level", "primary_motivation", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["threat_actor_types", "roles", "sophistication", "resource_level", "primary_motivation", "created_by_ref"],
         "properties":{
             "type": "threat-actor",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -388,18 +240,9 @@
     "tool": {
         "type": "object",
         "import": "common-properties",
-        "required": ["tool_types", "spec_version", "id", "created", "modified", "type", "name", "created_by_ref"],
+        "required": ["tool_types", "created_by_ref"],
         "properties":{
             "type": "tool",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -410,18 +253,8 @@
     "vulnerability": {
         "type": "object",
         "import": "common-properties",
-        "required": ["type", "spec_version", "id", "created_by_ref", "created", "modified", "name", "external_references"],
+        "required": ["created_by_ref", "external_references"],
         "properties":{
-            "type": "tool",
-            "created": {
-                "type": "string",
-                "semantics":"stix-timestamp"
-            },
-            "modified": {
-                "type": "string",
-                "semantics": "stix-timestamp"
-            },
-            "spec_version":"2.1",
             "created_by_ref": {
                 "type": "string",
                 "semantics": "stix-id",
@@ -437,7 +270,27 @@
     "sighting": {
         "type": "object",
         "import": "common-properties",
-        "required": ["first_seen", "last_seen", "count", "created_by_ref"]
+        "required": ["first_seen", "last_seen", "count", "created_by_ref"],
+        "properties":{
+            "first_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "last_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 999999999
+            },
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            }
+        }
     },
     "common-properties": {
         "properties":{
@@ -448,7 +301,8 @@
                     "semantics": "stix-id",
                     "stix-type": "marking-definition"
                 },
-                "maxItems": 1
+                "maxItems": 1,
+                "minItems": 1
             }
         }
     }
