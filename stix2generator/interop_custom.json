@@ -1,0 +1,144 @@
+{
+    "attack-pattern": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["external_references", "kill_chain_phases"],
+        "properties":{
+            "external_references":{
+                "type": "array",
+                "ref": "external-references"
+            }
+        }
+    },
+    "campaign": {
+        "type": "object",
+        "import": "common-properties"
+    },
+    "course-of-action": {
+        "type": "object",
+        "import": "common-properties"
+    },
+    "grouping": {
+        "type": "object",
+        "import": "common-properties"
+    },
+    "incident": {
+        "type": "object",
+        "import": "common-properties"
+    },
+    "identity": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["identity_class"]
+    },
+    "indicator": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["indicator_types","name"]
+    },
+    "infrastructure": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["infrastructure_types"]
+    },
+    "intrusion-set": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["resource_level", "primary_motivation"]
+    },
+    "location": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["region"]
+    },
+    "malware": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["malware_types", "first_seen", "last_seen", "architecture_execution_envs", "implementation_languages", "capabilities"]
+    },
+    "malware-analysis": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["version", "submitted", "analysis_started", "analysis_ended", "results"]
+    },
+    "note": {
+        "type": "object",
+        "import": "common-properties"
+    },
+    "observed-data": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["object_refs"]
+    },
+    "opinion": {
+        "type": "object",
+        "import": "common-properties"
+    },
+    "report": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["report_types"]
+    },
+    "threat-actor": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["threat_actor_types", "roles", "sophistication", "resource_level", "primary_motivation"]
+    },
+    "tool": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["tool_types"]
+    },
+    "vulnerability": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["external_references"],
+        "properties":{
+            "external_references": {
+                "type": "array",
+                "ref": "external-references"
+            }
+        }
+
+    },
+    "sighting": {
+        "type": "object",
+        "import": "common-properties",
+        "required": ["first_seen", "last_seen", "count"],
+        "properties":{
+            "first_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "last_seen": {
+                "type": "string",
+                "semantics": "stix-timestamp"
+            },
+            "count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 999999999
+            }
+        }
+    },
+    "common-properties": {
+        "required": ["created_by_ref"],
+        "properties":{
+            "created_by_ref": {
+                "type": "string",
+                "semantics": "stix-id",
+                "stix-type": "identity"
+            },
+            "object_marking_refs": {
+                "type": "array",
+                "items": {
+                    "type": "string",
+                    "semantics": "stix-id",
+                    "stix-type": "marking-definition"
+                },
+                "maxItems": 1,
+                "minItems": 1
+            }
+        }
+    }
+}
