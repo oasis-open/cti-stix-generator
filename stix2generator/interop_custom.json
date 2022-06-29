@@ -59,7 +59,7 @@
     "malware-analysis": {
         "type": "object",
         "import": "common-properties",
-        "required": ["version", "submitted", "analysis_started", "analysis_ended", "results"]
+        "required": ["version", "submitted", "analysis_started", "analysis_ended", "result"]
     },
     "note": {
         "type": "object",
