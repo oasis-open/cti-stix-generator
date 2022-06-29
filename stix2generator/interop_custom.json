@@ -54,7 +54,7 @@
     "malware": {
         "type": "object",
         "import": "common-properties",
-        "required": ["malware_types", "first_seen", "last_seen", "architecture_execution_envs", "implementation_languages", "capabilities"]
+        "required": ["is_family", "name", "malware_types", "first_seen", "last_seen", "architecture_execution_envs", "implementation_languages", "capabilities"]
     },
     "malware-analysis": {
         "type": "object",
