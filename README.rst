@@ -202,11 +202,9 @@ Initially, the TC members have designated one or more persons to serve as Mainta
 Current Maintainers of this TC Open Repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
--  `Chris Lenk <mailto:clenk@mitre.org>`__; GitHub ID: `clenk <https://github.com/clenk/>`__; WWW: `MITRE Corporation <http://www.mitre.org/>`__
+-  `Emily Ratliff <mailto:Emily.Ratliff@ibm.com>`__; GitHub ID: https://github.com/ejratl; WWW: `IBM <http://www.ibm.com/>`__
 
--  `Andy Chisholm <mailto:chisholm@mitre.org>`__; GitHub ID: `chisholm <https://github.com/chisholm/>`__; WWW: `MITRE Corporation <http://www.mitre.org/>`__
-
--  `Rich Piazza <mailto:rpiazza@mitre.org>`__; GitHub ID: `rpiazza <https://github.com/rpiazza/>`__; WWW: `MITRE Corporation <http://www.mitre.org/>`__
+-  `Duncan Sparrell <mailto:duncan@sfractal.com>`__; GitHub ID: https://github.com/sparrell; WWW: `sFractal <http://sfractal.com/>`__
 
 About OASIS TC Open Repositories
 --------------------------------
