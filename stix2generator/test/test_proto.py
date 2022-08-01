@@ -177,7 +177,7 @@ def test_basic(processor):
     assert len(objs) == 1
 
     identity = objs[0]
-    assert(identity.type == "identity")
+    assert identity.type == "identity"
 
 
 def test_basic_count(processor):
