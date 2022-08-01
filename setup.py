@@ -16,8 +16,6 @@ setup(
     url='https://github.com/oasis-open/cti-stix-generator',
     author='OASIS Cyber Threat Intelligence Technical Committee',
     author_email='cti-users@lists.oasis-open.org',
-    maintainer='Chris Lenk, Andy Chisholm',
-    maintainer_email='clenk@mitre.org, chisholm@mitre.org',
     license='BSD',
     classifiers=[
         'Development Status :: 4 - Beta',
