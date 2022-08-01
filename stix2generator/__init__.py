@@ -134,6 +134,8 @@ def _update_dict_recursive(base_dict, new_dict):
                 del base_dict[key]
             else:
                 base_dict[key] = _update_dict_recursive(base_dict.get(key, {}), val)
+        elif isinstance(val, list):
+            base_dict[key].extend(val)
         else:
             base_dict[key] = val
     return base_dict
