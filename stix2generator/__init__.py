@@ -130,11 +130,11 @@ def _update_dict_recursive(base_dict, new_dict):
     for key, val in new_dict.items():
         if isinstance(val, Mapping):
             # if new val is empty, that means delete key
-            if not val:
+            if not val and key in base_dict:
                 del base_dict[key]
             else:
                 base_dict[key] = _update_dict_recursive(base_dict.get(key, {}), val)
-        elif isinstance(val, list):
+        elif isinstance(val, list) and key in base_dict:
             base_dict[key].extend(val)
         else:
             base_dict[key] = val

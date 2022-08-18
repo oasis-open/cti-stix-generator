@@ -50,7 +50,9 @@ def parse_args():
                             """
                             )
     arg_parser.add_argument("--interop",
-                            help="""Specifies to use a custorm interop registry so content mirrors valid interop content. Warning, overwrites extra-specs if both called.
+                            help="""Specifies to use a custorm interop registry
+                            so content mirrors valid interop content. Warning,
+                            overwrites extra-specs if both called.
                             """,
                             action="store_true")
     arg_parser.add_argument("-n", "--embed-variable-names",
@@ -82,7 +84,7 @@ def main():
     if args.extra_specs:
         with open(args.extra_specs, "r", encoding=args.encoding) as f:
             extra_specs = json.load(f)
-    if args.interop: 
+    if args.interop:
         with open('../interop_custom.json', "r", encoding=args.encoding) as f:
             extra_specs = json.load(f)
     tmp_config = {}
