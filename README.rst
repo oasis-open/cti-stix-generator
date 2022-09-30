@@ -1,4 +1,4 @@
-|Build_Status| |Coverage| |Version| |Binder|
+|Build_Status| |Coverage| |Version| |Binder| |Scorecard|
 
 cti-stix-generator
 ==================
@@ -230,3 +230,5 @@ Please send general questions about TC Open Repository participation to OASIS St
    :target: https://pypi.org/project/stix2-generator/
 .. |Binder| image:: https://mybinder.org/badge_logo.svg
    :target: https://mybinder.org/v2/gh/oasis-open/cti-stix-generator/HEAD
+.. |Scorecard| image:: https://api.securityscorecards.dev/projects/github.com/oasis-open/cti-stix-generator/badge
+     :target: https://api.securityscorecards.dev/projects/github.com/oasis-open/cti-stix-generator
