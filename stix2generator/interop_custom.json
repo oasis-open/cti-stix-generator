@@ -468,7 +468,8 @@
                     "semantics": "stix-id",
                     "stix-type": "marking-definition"
                 },
-                "maxItems": 1
+                "maxItems": 1,
+                "minItems": 1
             }
         }
     }
