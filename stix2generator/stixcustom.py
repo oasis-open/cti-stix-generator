@@ -72,7 +72,7 @@ def _prop_for_spec(prop_name, prop_spec, stix_version):
             element_spec = prop_spec["items"]
 
         element_prop_obj = _prop_for_spec("", element_spec, stix_version)
-        
+
         if "ref" in prop_name or "refs" in prop_name:
             prop_obj = stix2.properties.ListProperty(stix2.properties.ReferenceProperty(valid_types=element_spec["stix-type"], spec_version='2.1'))
         else:
