@@ -30,7 +30,7 @@ def _is_list_content_homogenous_type(list_):
     return result
 
 
-def _prop_for_spec(prop_spec, stix_version):
+def _prop_for_spec(prop_name, prop_spec, stix_version):
     """
     Given an object generator spec, which is treated as a spec for a property
     value of an object, determine the type of value the spec generates and
@@ -45,8 +45,11 @@ def _prop_for_spec(prop_spec, stix_version):
     )
 
     if prop_spec_type in _JSON_SIMPLE_TYPE_STIX_PROPERTY_MAP:
-        prop_class = _JSON_SIMPLE_TYPE_STIX_PROPERTY_MAP[prop_spec_type]
-        prop_obj = prop_class()
+        if "ref" in prop_name or "refs" in prop_name:
+            prop_obj = stix2.properties.ReferenceProperty(valid_types=prop_spec['stix-type'])
+        else:
+            prop_class = _JSON_SIMPLE_TYPE_STIX_PROPERTY_MAP[prop_spec_type]
+            prop_obj = prop_class()
 
     elif prop_spec_type == "object":
         # DictionaryProperty needs a spec_version parameter.
@@ -63,21 +66,23 @@ def _prop_for_spec(prop_spec, stix_version):
                 raise stix2generator.exceptions.EmptyListError()
             if not _is_list_content_homogenous_type(prop_spec):
                 raise stix2generator.exceptions.HeterogenousListError(prop_spec)
-
             element_spec = prop_spec[0]
 
         else:
             element_spec = prop_spec["items"]
 
-        element_prop_obj = _prop_for_spec(element_spec, stix_version)
-        prop_obj = stix2.properties.ListProperty(element_prop_obj)
+        element_prop_obj = _prop_for_spec("", element_spec, stix_version)
+
+        if "ref" in prop_name or "refs" in prop_name:
+            prop_obj = stix2.properties.ListProperty(stix2.properties.ReferenceProperty(valid_types=element_spec["stix-type"], spec_version='2.1'))
+        else:
+            prop_obj = stix2.properties.ListProperty(element_prop_obj)
 
     else:
         # Maybe we just hit this for "null" specs?
         raise stix2generator.exceptions.IllegalSTIXObjectPropertyType(
             prop_spec_type
         )
-
     return prop_obj
 
 
@@ -110,7 +115,7 @@ def stix2_register_custom(spec, obj_type_name, stix_version):
         prop_specs = spec.get("properties", {})
 
     prop_map = [
-        (prop_name, _prop_for_spec(prop_spec, stix_version))
+        (prop_name, _prop_for_spec(prop_name, prop_spec, stix_version))
         for prop_name, prop_spec in prop_specs.items()
     ]
 
