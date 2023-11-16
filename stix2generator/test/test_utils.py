@@ -18,19 +18,21 @@ def object_generator21():
     "obj, findings", [
         ({"type": "foo", "a_ref": 1, "b_ref": 2, "c": 3}, {("a_ref", 1), ("b_ref", 2)}),
         ({"type": "foo", "a_refs": [1, 2], "b_ref": 3, "c": 4}, {("a_refs", 1), ("a_refs", 2), ("b_ref", 3)}),
-        ({"type": "foo", "a": {"b": {"c_ref": 1}}}, {("c_ref", 1)})
+        ({"type": "foo", "a": {"b": {"c_ref": 1}}}, {("c_ref", 1)}),
+        ({"type": "foo", "a": [{"b_ref": 1}, {"b_ref": 2}, {"c": [{"d_ref": 3}]}]}, {("b_ref", 1), ("b_ref", 2), ("d_ref", 3)})
     ]
 )
 def test_find_references(obj, findings):
-    for ref_prop, ref_id in stix2generator.utils.find_references(obj):
-        assert (ref_prop, ref_id) in findings
+    found = set(stix2generator.utils.find_references(obj))
+    assert found == findings
 
 
 @pytest.mark.parametrize(
     "obj", [
         {"type": "foo", "a_ref": 1, "b_ref": 1, "c": 1},
         {"type": "foo", "a_refs": [1, 1], "b_ref": 1, "c": 1},
-        {"type": "foo", "a": {"b": {"c_ref": 1}}}
+        {"type": "foo", "a": {"b": {"c_ref": 1}}},
+        {"type": "foo", "a": [{"b_ref": 1}, {"b_ref": 1}, {"c": [{"d_ref": 1}]}]}
     ]
 )
 def test_find_references_assignable(obj):
