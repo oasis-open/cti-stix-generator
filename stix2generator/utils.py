@@ -68,7 +68,7 @@ def recurse_references(obj):
     observed-data/objects.
 
     :param obj: An object.  Can be any type, but values will only be produced
-        from mappings.
+        from mappings (or iterables containing mappings).
     """
     if isinstance(obj, collections.abc.Mapping):
         for prop, value in obj.items():
@@ -81,6 +81,11 @@ def recurse_references(obj):
 
             else:
                 yield from recurse_references(value)
+
+    elif isinstance(obj, collections.abc.Iterable) \
+            and not isinstance(obj, str):
+        for elt in obj:
+            yield from recurse_references(elt)
 
 
 def find_references(obj):
@@ -116,7 +121,7 @@ def recurse_references_assignable(obj):
     special casing for observed-data/objects.
 
     :param obj: An object.  Can be any type, but values will only be produced
-        from mappings.
+        from mappings (or iterables containing mappings).
     """
     if isinstance(obj, collections.abc.Mapping):
         for prop, value in obj.items():
@@ -129,6 +134,11 @@ def recurse_references_assignable(obj):
 
             else:
                 yield from recurse_references_assignable(value)
+
+    elif isinstance(obj, collections.abc.Iterable) \
+            and not isinstance(obj, str):
+        for elt in obj:
+            yield from recurse_references_assignable(elt)
 
 
 def find_references_assignable(obj):
