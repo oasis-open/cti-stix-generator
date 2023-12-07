@@ -515,7 +515,7 @@ class ReferenceGraphGenerator:
             .Config(
                 **halt_generator_config_dict
             )
-        self.__halt_generator = stix2generator.create_object_generator(
+        self.__halt_generator = object_generator.derive_generator(
             halt_generator_config
         )
 

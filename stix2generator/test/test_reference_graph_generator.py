@@ -1,12 +1,14 @@
 import copy
 
 import pytest
+import stix2
 import stix2.base
 import stix2.utils
 
 import stix2generator
 import stix2generator.generation.object_generator
 import stix2generator.generation.reference_graph_generator
+import stix2generator.generation.semantics
 import stix2generator.test.utils
 
 _TLP_MARKING_DEFINITION_IDS = {
@@ -959,3 +961,88 @@ def test_not_parsing(num_trials):
 
             else:
                 assert isinstance(obj, dict)
+
+
+def test_ref_gen_with_custom():
+    """
+    Set up a reference graph generator with an object generator with stuff
+    you would not get by default via
+    stix2generator.create_object_generator(...).  Reference graph generator
+    creates a derivative "halt" generator, and we need to ensure that the
+    latter inherits the same config as the original object generator, including
+    registry and semantics providers.
+    """
+    class TestSemantics(stix2generator.generation.semantics.SemanticsProvider):
+        def get_semantics(self):
+            return ["testxyz"]
+
+        def testxyz(self, spec, generator, constraint):
+            return "test"
+
+    custom_registry = {
+        # A self-referential type, to cause simple reference chains
+        "test-ref-type": {
+            "type": "object",
+            "optional": ["obj_ref"],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "semantics": "stix-id",
+                    "stix-type": "test-ref-type"
+                },
+                "type": "test-ref-type",
+                "test_prop": {
+                    "type": "string",
+                    "semantics": "testxyz"
+                },
+                "obj_ref": {
+                    "type": "string",
+                    "semantics": "stix-id",
+                    "stix-type": "test-ref-type"
+                }
+            }
+        }
+    }
+
+    @stix2.CustomObject("test-ref-type", [])
+    class TestRefType:
+        # This class won't be used since we'll turn the parse setting off; but
+        # we need a registration so test-ref-type is seen as a generatable
+        # type.  So we can leave it empty.
+        pass
+
+    semantics_providers = [
+        TestSemantics(),
+        stix2generator.generation.semantics.STIXSemantics()
+    ]
+
+    obj_gen_config = stix2generator.generation.object_generator.Config(
+        optional_property_probability=1,
+        minimize_ref_properties=False
+    )
+
+    obj_gen = stix2generator.generation.object_generator.ObjectGenerator(
+        custom_registry, semantics_providers, obj_gen_config
+    )
+
+    ref_gen_config = stix2generator.generation.reference_graph_generator \
+        .Config(
+            graph_type="TREE",
+            parse=False
+        )
+
+    ref_gen = stix2generator.generation.reference_graph_generator \
+        .ReferenceGraphGenerator(
+            obj_gen, ref_gen_config
+        )
+
+    _, graph = ref_gen.generate()
+
+    for obj in graph.values():
+        # Ensure our semantics provider was invoked properly for all objects
+        assert obj["test_prop"] == "test"
+
+        # Ensure no dangling references
+        obj_ref = obj.get("obj_ref")
+        if obj_ref is not None:
+            assert obj_ref in graph
