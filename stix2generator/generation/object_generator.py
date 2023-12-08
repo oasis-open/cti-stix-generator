@@ -1,3 +1,4 @@
+import copy
 import itertools
 import logging
 import math
@@ -106,8 +107,8 @@ class ObjectGenerator:
 
         :param spec_registry: A name->specification mapping used to look
             up references inside of specifications
-        :param semantic_providers: A list of semantic providers (e.g.
-            instances of subclasses of SemanticsProvider)
+        :param semantic_providers: An iterable of semantic providers (e.g.
+            instances of subclasses of SemanticsProvider), or None
         :param config: A Config instance giving user settings regarding
             generation.  If None, defaults will be used.
         """
@@ -141,6 +142,27 @@ class ObjectGenerator:
         :return: An iterable of spec names
         """
         return self.__specs.keys()
+
+    def derive_generator(self, new_config):
+        """
+        Create an object generator using this generator's registry and
+        semantics providers, but with a given config.
+
+        :param new_config: An instance of Config giving desired configuration
+            settings for the new object generator
+        :return: A new object generator
+        """
+
+        our_providers = copy.deepcopy(set(self.__semantics.values()))
+        our_specs = copy.deepcopy(self.__specs)
+
+        new_generator = ObjectGenerator(
+            spec_registry=our_specs,
+            semantic_providers=our_providers,
+            config=new_config
+        )
+
+        return new_generator
 
     def generate(
         self, spec_name, expected_type=None, spec_name_stack=None,
